@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "sadowa20website:build:production"
+              "buildTarget": "sadowa20website:build:production"
             },
             "development": {
-              "browserTarget": "sadowa20website:build:development"
+              "buildTarget": "sadowa20website:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sadowa20website:build"
+            "buildTarget": "sadowa20website:build"
           }
         },
         "test": {
