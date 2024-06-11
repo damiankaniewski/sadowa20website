@@ -1,10 +1,14 @@
 <header>
   <div>
-    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <a (click)="scrollToElement('homepage')">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+    </a>
   </div>
   <nav>
-    <a (click)="scrollToElement('home')">Strona główna</a>
-    <a (click)="scrollToElement('offer')">Oferta</a>
+    <a (click)="scrollToElement('about')">O inwestycji</a>
+    <a (click)="scrollToElement('location')">Lokalizacja</a>
+    <a (click)="scrollToElement('profits')">Profity</a>
+    <a (click)="scrollToElement('houses')">Domy</a>
     <a (click)="scrollToElement('contact')">Kontakt</a>
   </nav>
 </header>

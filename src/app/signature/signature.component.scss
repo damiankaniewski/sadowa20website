@@ -1,0 +1,16 @@
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+  background-color: #333;
+  color: #fff;
+
+  div {
+    p {
+      text-align: right;
+      padding: 5px;
+    }
+  }
+}

@@ -1,1 +1,26 @@
-<p>houses works!</p>
+<div class="main-container">
+  <h2>Lista domów:</h2>
+  <div class="houses-list">
+    <div *ngFor="let house of data" class="house-item">
+      <p>Numer domu: {{ house.numer }}</p>
+      <p>Metraż: {{ house.metraz }}</p>
+      <p>Pokoje: {{ house.pokoje }}</p>
+      <img [src]="house.obrazek" alt="House Image" />
+      <p>{{ house.dostepnosc ? "Dostępny" : "Niedostępny" }}</p>
+      <button class="house-button" (click)="openModal(house)">Szczegóły</button>
+      <button class="house-button" (click)="downloadPDF(house)">
+        Pobierz PDF
+      </button>
+    </div>
+  </div>
+</div>
+
+<div #modal id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <p>Numer domu: {{ selectedHouse?.numer }}</p>
+    <p>Metraż: {{ selectedHouse?.metraz }}</p>
+    <p>Pokoje: {{ selectedHouse?.pokoje }}</p>
+    <button (click)="downloadPDF(selectedHouse)">Pobierz PDF</button>
+  </div>
+</div>
