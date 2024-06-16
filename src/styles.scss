@@ -1,5 +1,39 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@use "@angular/material" as mat;
+@include mat.core();
+
+$sadowa20website-primary: mat.define-palette(mat.$indigo-palette);
+$sadowa20website-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+$sadowa20website-warn: mat.define-palette(mat.$red-palette);
+$sadowa20website-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $sadowa20website-primary,
+      accent: $sadowa20website-accent,
+      warn: $sadowa20website-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+@include mat.all-component-themes($sadowa20website-theme);
+
 @import "aos/dist/aos.css";
+@import "@fortawesome/fontawesome-free/css/all.css";
+@font-face {
+  font-family: "LemonMilk";
+  src: url("/assets/fonts/LEMONMILK-Bold.otf") format("otf");
+  src: url("/assets/fonts/LEMONMILK-BoldItalic.otf") format("otf");
+  src: url("/assets/fonts/LEMONMILK-Light.otf") format("otf");
+  src: url("/assets/fonts/LEMONMILK-LightItalic.otf") format("otf");
+  src: url("/assets/fonts/LEMONMILK-Medium.otf") format("otf");
+  src: url("/assets/fonts/LEMONMILK-MediumItalic.otf") format("otf");
+  src: url("/assets/fonts/LEMONMILK-ReularItalic.otf") format("otf");
+}
 
 body[data-aos-duration="5000"] [data-aos],
 [data-aos][data-aos][data-aos-duration="5000"] {
@@ -8,6 +42,7 @@ body[data-aos-duration="5000"] [data-aos],
 
 body {
   background-image: url("assets/images/backgroundConcrete.jpg");
+  overflow-x: hidden;
 }
 
 * {
@@ -15,7 +50,5 @@ body {
   padding: 0;
   box-sizing: border-box;
 
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  font-family: "LemonMilk", sans-serif;
 }

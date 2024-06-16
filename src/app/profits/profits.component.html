@@ -1,1 +1,117 @@
-<p>profits works!</p>
+<div class="main-container">
+  <div class="left-side">
+    <div class="image-container" data-aos="fade-right" data-aos-duration="2000">
+      <img [src]="imagePaths[0]" [class.active]="activeIndex === 0" alt="" />
+      <img [src]="imagePaths[1]" [class.active]="activeIndex === 1" alt="" />
+      <img [src]="imagePaths[2]" [class.active]="activeIndex === 2" alt="" />
+    </div>
+    <div class="list-container">
+      <div
+        class="tile"
+        data-aos="fade-left"
+        data-aos-delay="300"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-temperature-arrow-up"></i>
+        <div class="tile-content">
+          <h2>Ogrzewanie</h2>
+          <p>
+            W całym mieszkaniu zainstalowano ogrzewanie podłogowe, co zapewnia
+            wyjątkowy komfort termiczny przez cały rok.
+          </p>
+          <hr />
+        </div>
+      </div>
+      <div
+        class="tile"
+        data-aos="fade-left"
+        data-aos-delay="600"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-house-chimney-user"></i>
+        <div class="tile-content">
+          <h2>Osiedle</h2>
+          <p>
+            Zamknięte i monitorowane, zapewniające bezpieczeństwo i prywatność,
+            z dostępem do dwóch miejsc parkingowych na mieszkanie i wspólnej
+            strefy wypoczynku.
+          </p>
+          <hr />
+        </div>
+      </div>
+      <div
+        class="tile"
+        data-aos="fade-left"
+        data-aos-delay="900"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-leaf"></i>
+        <div class="tile-content">
+          <h2>Przestrzeń zielona</h2>
+          <p>
+            Obszerne tereny zielone otaczające osiedle, sprzyjające aktywnemu
+            wypoczynkowi i spacerom na świeżym powietrzu.
+          </p>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+    <div class="image-container" data-aos="fade-left" data-aos-duration="2000">
+      <img [src]="imagePaths[1]" [class.active]="activeIndex === 0" alt="" />
+      <img [src]="imagePaths[2]" [class.active]="activeIndex === 1" alt="" />
+      <img [src]="imagePaths[0]" [class.active]="activeIndex === 2" alt="" />
+    </div>
+    <div class="list-container">
+      <div
+        class="tile"
+        data-aos="fade-right"
+        data-aos-delay="300"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-hands-holding-child"></i>
+        <div class="tile-content">
+          <h2>Komfort</h2>
+          <p>
+            Nowoczesny piec gazowy oraz wysoki standard wykończenia mieszkań
+            zapewniający efektywne ogrzewanie i komfort użytkowania.
+          </p>
+          <hr />
+        </div>
+      </div>
+      <div
+        class="tile"
+        data-aos="fade-right"
+        data-aos-delay="600"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-house-laptop"></i>
+        <div class="tile-content">
+          <h2>Udogodnienia</h2>
+          <p>
+            Wspólna strefa zielona z altanką oraz bliskość Centrum
+            Edukacyjno-Rekreacyjnego "Solne Miasto" z basenem i siłownią.
+          </p>
+          <hr />
+        </div>
+      </div>
+      <div
+        class="tile"
+        data-aos="fade-right"
+        data-aos-delay="900"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-umbrella-beach"></i>
+        <div class="tile-content">
+          <h2>Rekreacja</h2>
+          <p>
+            Bliskość kompleksu rekreacyjnego oferującego bogatą ofertę sportową,
+            idealna dla osób lubiących aktywny tryb życia.
+          </p>
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

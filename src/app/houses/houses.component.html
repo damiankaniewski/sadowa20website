@@ -1,17 +1,82 @@
 <div class="main-container">
-  <h2>Lista domów:</h2>
-  <div class="houses-list">
-    <div *ngFor="let house of data" class="house-item">
-      <p>Numer domu: {{ house.numer }}</p>
-      <p>Metraż: {{ house.metraz }}</p>
-      <p>Pokoje: {{ house.pokoje }}</p>
-      <img [src]="house.obrazek" alt="House Image" />
-      <p>{{ house.dostepnosc ? "Dostępny" : "Niedostępny" }}</p>
-      <button class="house-button" (click)="openModal(house)">Szczegóły</button>
-      <button class="house-button" (click)="downloadPDF(house)">
-        Pobierz PDF
+  <div class="houses-images">
+    <div class="base-image">
+      <img
+        src="{{
+          floor ? 'assets/images/domyWybor.png' : 'assets/images/domyWybor.png'
+        }}"
+        alt=""
+      />
+    </div>
+    <div class="floor-buttons">
+      <button class="floor-button" (click)="changeFloor()">
+        <img
+          [ngClass]="{ active: floor }"
+          src="assets/images/parterButton.png"
+          alt=""
+        />
+        <img
+          [ngClass]="{ active: !floor }"
+          src="assets/images/pietroButton.png"
+          alt=""
+        />
       </button>
     </div>
+    <ngx-slick-carousel class="houses-list" [config]="slideConfig">
+      <div *ngFor="let house of houses" ngxSlickItem class="house-item">
+        <p class="desc">
+          <strong><i class="fa-solid fa-house"></i> Numer domu:</strong>
+          {{ floor ? house.parter.numer : house.pietro.numer }}
+        </p>
+        <p class="desc">
+          <strong><i class="fa-solid fa-people-roof"></i> Metraż: </strong
+          >{{ floor ? house.parter.metraz : house.pietro.metraz }} m<sup>2</sup>
+        </p>
+        <p class="desc">
+          <strong><i class="fa-solid fa-person-shelter"></i> Pokoje: </strong
+          >{{ floor ? house.parter.pokoje : house.pietro.pokoje }}
+        </p>
+        <img
+          [src]="floor ? house.parter.obrazek : house.pietro.obrazek"
+          alt="House Image"
+        />
+        <p class="desc">
+          <strong>{{ floor ? "Parter" : "Piętro" }} </strong>
+        </p>
+        <p
+          [class.dostepny]="
+            floor ? house.parter.dostepnosc : house.pietro.dostepnosc
+          "
+          [class.niedostepny]="
+            !(floor ? house.parter.dostepnosc : house.pietro.dostepnosc)
+          "
+        >
+          <i
+            [ngClass]="
+              (floor ? house.parter.dostepnosc : house.pietro.dostepnosc)
+                ? 'fas fa-check'
+                : 'fas fa-times'
+            "
+          ></i>
+          <strong>
+            {{
+              (floor ? house.parter.dostepnosc : house.pietro.dostepnosc)
+                ? "Dostępny"
+                : "Niedostępny"
+            }}</strong
+          >
+        </p>
+        <hr />
+        <div class="buttons">
+          <button class="action-button" (click)="openModal(house)">
+            <i class="fa-solid fa-circle-info"></i> Szczegóły
+          </button>
+          <button class="action-button" (click)="pdfService.downloadPDF(house)">
+            <i class="fa-solid fa-file-pdf"></i> Pobierz PDF
+          </button>
+        </div>
+      </div>
+    </ngx-slick-carousel>
   </div>
 </div>
 
@@ -21,6 +86,11 @@
     <p>Numer domu: {{ selectedHouse?.numer }}</p>
     <p>Metraż: {{ selectedHouse?.metraz }}</p>
     <p>Pokoje: {{ selectedHouse?.pokoje }}</p>
-    <button (click)="downloadPDF(selectedHouse)">Pobierz PDF</button>
+    <button
+      class="action-button"
+      (click)="pdfService.downloadPDF(selectedHouse)"
+    >
+      Pobierz PDF
+    </button>
   </div>
 </div>

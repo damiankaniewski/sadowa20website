@@ -14,12 +14,16 @@ import { ContactComponent } from './contact/contact.component';
 import { SignatureComponent } from './signature/signature.component';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [AppComponent],
-  providers: [],
+  providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
@@ -33,6 +37,9 @@ firebase.initializeApp(environment.firebaseConfig);
     HousesComponent,
     ContactComponent,
     SignatureComponent,
+    SlickCarouselModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
   ],
 })
 export class AppModule {}

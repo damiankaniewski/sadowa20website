@@ -1,1 +1,18 @@
-<p>location works!</p>
+<div class="main-container">
+  <h2>Sadowa 20 to idealna lokalizacja dla Ciebie</h2>
+  <div class="location-container" data-aos="zoom-out" data-aos-duration="1000">
+    <div class="grid-item" *ngFor="let category of categories">
+      <div class="item-header">
+        <div class="background" [ngClass]="category.backgroundClass"></div>
+        <i class="fa-solid" [ngClass]="category.icon"></i>
+        <h3>{{ category.title }}</h3>
+      </div>
+      <hr />
+      <div class="item-content">{{ category.content }}</div>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <img src="assets/images/mapka.png" alt="Lokalizacja Sadowa 20" />
+  </div>
+</div>

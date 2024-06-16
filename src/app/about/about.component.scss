@@ -1,9 +1,11 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   font-size: 2rem;
-  margin-top: 50px;
+  margin-bottom: 20px;
 
   .row {
     display: flex;
@@ -28,10 +30,47 @@
 
       .text-container {
         width: 80%;
+        text-align: left;
 
+        h2 {
+          font-size: 2.5rem;
+        }
         p {
+          color: #333;
           margin-top: 20px;
-          font-size: 1.5rem;
+          font-size: 1.3rem;
+          line-height: 120%;
+        }
+        .action-button {
+          background-color: #fff;
+          border: 0 solid #e2e8f0;
+          border-radius: 1.5rem;
+          box-sizing: border-box;
+          color: #0d172a;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 1.1rem;
+          font-weight: 600;
+          line-height: 1;
+          padding: 1rem 1.6rem;
+          margin-top: 20px;
+          text-align: center;
+          text-decoration: none #0d172a solid;
+          text-decoration-thickness: auto;
+          transform: scale(1);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          z-index: 1;
+
+          &:hover {
+            background-color: #333;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+          }
         }
       }
     }
@@ -39,25 +78,79 @@
 
   .item1 {
     flex: 6;
+    position: relative;
 
     img {
       box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.5);
+      border-radius: 0 5px 5px 0;
+    }
+
+    .nightMode {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      filter: brightness(70%);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .nightMode.active {
+      opacity: 1;
+    }
+
+    .image-button {
+      position: absolute;
+      bottom: 10px;
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+      width: 100px;
+      opacity: 0.3;
+      height: auto;
+      transform: scale(1);
+      transition: all 0.3s;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+
+      img {
+        position: absolute;
+        bottom: 100%;
+        box-shadow: none !important;
+        filter: drop-shadow(2px 2px 2px rgba($color: #000000, $alpha: 0.5));
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .night-button {
+      opacity: 0;
+      transition: all 0.3s;
+    }
+    .night-button.active {
+      opacity: 1;
     }
   }
+}
 
-  .item2 {
-    flex: 4;
-  }
+.item2 {
+  flex: 4;
+}
 
-  .item3 {
-    flex: 4;
-  }
+.item3 {
+  flex: 4;
+}
 
-  .item4 {
-    flex: 6;
+.item4 {
+  flex: 6;
 
-    img {
-      box-shadow: -5px 5px 5px rgba($color: #000000, $alpha: 0.5);
-    }
+  img {
+    box-shadow: -5px 5px 5px rgba($color: #000000, $alpha: 0.5);
+    border-radius: 5px 0 0 5px;
   }
 }

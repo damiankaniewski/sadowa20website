@@ -1,0 +1,126 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: 3.5rem;
+    margin: 20px;
+  }
+  .location-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    color: #999;
+    box-shadow: 0px 0px 15px rgba($color: #000000, $alpha: 0.2);
+    text-align: center;
+    border-radius: 10px;
+    transform: scale(1);
+    transition: all 0.2s ease-in-out;
+
+    .item-header {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px 10px 0 0;
+      font-size: 1.8rem;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      color: white;
+      overflow: hidden;
+      text-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.5);
+
+      i {
+        margin-right: 10px;
+        z-index: 1;
+      }
+
+      h3 {
+        z-index: 1;
+      }
+
+      .background {
+        position: absolute;
+        filter: brightness(60%);
+        width: 100%;
+        height: 100%;
+        border-radius: 10px 10px 0 0;
+        background-size: cover;
+        background-position: center center;
+        transition: all 0.5s;
+      }
+      .background-zakupy {
+        background-image: url("/assets/images/shopInside.jpg");
+      }
+
+      .background-edukacja {
+        background-image: url("/assets/images/edukacja.jpg");
+      }
+
+      .background-transport {
+        background-image: url("/assets/images/transport.jpg");
+      }
+
+      .background-rozrywka {
+        background-image: url("/assets/images/football.jpg");
+      }
+
+      .background-uslugi {
+        background-image: url("/assets/images/services.jpg");
+      }
+
+      .background-rekreacja {
+        background-image: url("/assets/images/park.jpg");
+      }
+    }
+
+    hr {
+      width: 100%;
+      border: solid 1px #000000;
+    }
+    .item-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      font-size: 1.5rem;
+      width: 100%;
+      padding: 20px;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      color: #000;
+    }
+  }
+
+  .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.5);
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+}

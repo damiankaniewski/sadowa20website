@@ -1,29 +1,88 @@
 <div class="container">
   <div class="row">
-    <div class="item item1">
-      <img src="assets/images/placeholder1.jfif" alt="placeholder" />
+    <div class="item item1" data-aos="fade-right" data-aos-duration="1000">
+      <img src="assets/images/0003.png" alt="placeholder" />
+      <img
+        class="nightMode"
+        [ngClass]="{ active: isNightMode }"
+        src="assets/images/mainImage.png"
+        alt="placeholder"
+      />
+      <button class="image-button" (click)="toggleMode()">
+        <img src="assets/images/dayButton.png" alt="" />
+        <img
+          class="night-button"
+          [ngClass]="{ active: isNightMode }"
+          src="assets/images/nightButton.png"
+          alt=""
+        />
+      </button>
     </div>
-    <div class="item item2">
+    <div
+      class="item item2"
+      data-aos="fade-left"
+      data-aos-delay="500"
+      data-aos-duration="1500"
+    >
       <div class="text-container">
-        <h2>Komunikacja publiczna</h2>
+        <h2>Idealne miejsce dla Ciebie</h2>
         <p>
-          Efektywne i dostępne systemy transportu dla wszystkich użytkowników
+          Krzyszkowice w Wieliczce to urokliwa miejscowość, idealna dla osób
+          poszukujących <strong>spokoju i bliskości natury</strong>, a
+          jednocześnie pragnących mieć łatwy dostęp do miejskich udogodnień.
+          Znajdziesz tu <strong>malownicze tereny zielone</strong>, idealne na
+          spacery i rekreację, a także dobrze rozwiniętą infrastrukturę -
+          sklepy, szkoły i przedszkola są na wyciągnięcie ręki. Doskonałe
+          połączenia komunikacyjne z Krakowem sprawiają, że dojazd do centrum
+          miasta zajmuje zaledwie <strong>kilkanaście minut</strong>, co jest
+          ogromnym atutem dla osób pracujących w stolicy Małopolski.
         </p>
+        <a href="https://maps.app.goo.gl/ky36AzyoukSBBcu26" target="_blank">
+          <button class="action-button">
+            Zobacz na mapie
+            <i class="fa-solid fa-location-dot" style="margin-left: 5px"></i>
+          </button>
+        </a>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="item item3">
+    <div
+      class="item item3"
+      data-aos="fade-right"
+      data-aos-delay="500"
+      data-aos-duration="1000"
+    >
       <div class="text-container">
-        <h2>Zdrowe otoczenie</h2>
+        <h2>Zdrowe, przyjazne otoczenie</h2>
         <p>
-          Przyjazne, zielone przestrzenie wspierające zdrowie i dobre
-          samopoczucie
+          Krzyszkowice oferują także bogatą ofertę
+          <strong>kulturalną i sportową</strong>, co czyni je idealnym miejscem
+          do zamieszkania dla rodzin i osób aktywnych. Warto wspomnieć o
+          bliskości
+          <strong>Centrum Edukacyjno-Rekreacyjnego "Solne Miasto"</strong>,
+          które oferuje szeroką gamę atrakcji sportowych i rekreacyjnych, w tym
+          basen, siłownię, saunę oraz korty tenisowe. To doskonałe miejsce na
+          aktywne spędzanie czasu i rozwijanie pasji sportowych. Krzyszkowice to
+          miejsce, gdzie możesz cieszyć się
+          <strong>spokojem i komfortem</strong>, nie rezygnując z aktywnego
+          trybu życia i miejskich udogodnień.
         </p>
+        <a href="https://maps.app.goo.gl/F9wdf5pLZYtiis7c6" target="_blank">
+          <button class="action-button">
+            Zobacz okolicę
+            <i class="fa-solid fa-location-dot" style="margin-left: 5px"></i>
+          </button>
+        </a>
       </div>
     </div>
-    <div class="item item4">
-      <img src="assets/images/placeholder2.jfif" alt="placeholder" />
+    <div
+      class="item item4"
+      data-aos="fade-left"
+      data-aos-delay="1000"
+      data-aos-duration="1500"
+    >
+      <img src="assets/images/0002.png" alt="placeholder" />
     </div>
   </div>
 </div>
