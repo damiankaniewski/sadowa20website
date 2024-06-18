@@ -1,96 +1,40 @@
 <div class="main-container">
-  <div class="houses-images">
-    <div class="base-image">
-      <img
-        src="{{
-          floor ? 'assets/images/domyWybor.png' : 'assets/images/domyWybor.png'
-        }}"
-        alt=""
-      />
-    </div>
-    <div class="floor-buttons">
-      <button class="floor-button" (click)="changeFloor()">
-        <img
-          [ngClass]="{ active: floor }"
-          src="assets/images/parterButton.png"
-          alt=""
-        />
-        <img
-          [ngClass]="{ active: !floor }"
-          src="assets/images/pietroButton.png"
-          alt=""
-        />
-      </button>
-    </div>
-    <ngx-slick-carousel class="houses-list" [config]="slideConfig">
-      <div *ngFor="let house of houses" ngxSlickItem class="house-item">
-        <p class="desc">
-          <strong><i class="fa-solid fa-house"></i> Numer domu:</strong>
-          {{ floor ? house.parter.numer : house.pietro.numer }}
-        </p>
-        <p class="desc">
-          <strong><i class="fa-solid fa-people-roof"></i> Metraż: </strong
-          >{{ floor ? house.parter.metraz : house.pietro.metraz }} m<sup>2</sup>
-        </p>
-        <p class="desc">
-          <strong><i class="fa-solid fa-person-shelter"></i> Pokoje: </strong
-          >{{ floor ? house.parter.pokoje : house.pietro.pokoje }}
-        </p>
-        <img
-          [src]="floor ? house.parter.obrazek : house.pietro.obrazek"
-          alt="House Image"
-        />
-        <p class="desc">
-          <strong>{{ floor ? "Parter" : "Piętro" }} </strong>
-        </p>
-        <p
-          [class.dostepny]="
-            floor ? house.parter.dostepnosc : house.pietro.dostepnosc
-          "
-          [class.niedostepny]="
-            !(floor ? house.parter.dostepnosc : house.pietro.dostepnosc)
-          "
-        >
-          <i
-            [ngClass]="
-              (floor ? house.parter.dostepnosc : house.pietro.dostepnosc)
-                ? 'fas fa-check'
-                : 'fas fa-times'
-            "
-          ></i>
-          <strong>
-            {{
-              (floor ? house.parter.dostepnosc : house.pietro.dostepnosc)
-                ? "Dostępny"
-                : "Niedostępny"
-            }}</strong
-          >
-        </p>
-        <hr />
-        <div class="buttons">
-          <button class="action-button" (click)="openModal(house)">
-            <i class="fa-solid fa-circle-info"></i> Szczegóły
-          </button>
-          <button class="action-button" (click)="pdfService.downloadPDF(house)">
-            <i class="fa-solid fa-file-pdf"></i> Pobierz PDF
-          </button>
-        </div>
-      </div>
-    </ngx-slick-carousel>
-  </div>
-</div>
+  <div class="choose-container">
+    <div class="choose-image-container">
+      <button class="house-choose-button available" id="house1a">1a</button>
+      <button class="house-choose-button unavailable" id="house1b">1b</button>
+      <button class="house-choose-button available" id="house2a">2a</button>
+      <button class="house-choose-button available" id="house2b">2b</button>
+      <button class="house-choose-button unavailable" id="house3a">3a</button>
+      <button class="house-choose-button unavailable" id="house3b">3b</button>
+      <button class="house-choose-button unavailable" id="house4a">4a</button>
+      <button class="house-choose-button available" id="house4b">4b</button>
+      <button class="house-choose-button available" id="house5a">5a</button>
+      <button class="house-choose-button unavailable" id="house5b">5b</button>
+      <button class="house-choose-button available" id="house6a">6a</button>
+      <button class="house-choose-button unavailable" id="house6b">6b</button>
 
-<div #modal id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
-    <p>Numer domu: {{ selectedHouse?.numer }}</p>
-    <p>Metraż: {{ selectedHouse?.metraz }}</p>
-    <p>Pokoje: {{ selectedHouse?.pokoje }}</p>
-    <button
-      class="action-button"
-      (click)="pdfService.downloadPDF(selectedHouse)"
-    >
-      Pobierz PDF
-    </button>
+      <!-- reszta przyuciskow -->
+      <img src="assets/images/domyWybor.png" alt="" />
+    </div>
+    <div class="house-details">
+      <div class="house-name">
+        <h1>Sadowa 20</h1>
+      </div>
+      <div class="house-description">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod
+          lacinia dui, ac efficitur ipsum. Pellentesque habitant morbi tristique
+          senectus et netus et malesuada fames ac turpis egestas.
+        </p>
+      </div>
+      <div class="house-price">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod
+          lacinia dui, ac efficitur ipsum. Pellentesque habitant morbi tristique
+          senectus et netus et malesuada fames ac turpis egestas.
+        </p>
+      </div>
+    </div>
   </div>
 </div>

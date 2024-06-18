@@ -1,216 +1,121 @@
 .main-container {
-  .houses-images {
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .choose-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 90%;
 
-    .base-image {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: white;
-      overflow: hidden;
-      width: 100%;
+    .choose-image-container {
+      position: relative;
+      z-index: 1;
+      width: 70%;
+      border-radius: 5px;
 
       img {
         width: 100%;
+        height: auto;
         object-fit: cover;
-        object-position: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.5);
       }
-    }
-    .floor-buttons {
-      position: absolute;
-      bottom: 30px;
-      right: calc(50% + 10px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
 
-      .floor-button {
-        position: relative;
-        width: 70px;
-        height: 70px;
-        padding: 0;
+      .house-choose-button {
+        position: absolute;
+        width: 3.5%;
+        height: 5.5%;
         background-color: white;
-        border-radius: 10px;
-        border: none;
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-
-        img {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-
-        .active {
-          filter: brightness(20%);
-        }
+        font-weight: bold;
+        font-size: 1.2vw;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.7);
+        z-index: 2;
+        opacity: 0.75;
+        transform: scale(1);
+        transition: opacity 0.25s ease, transform 0.25s ease;
       }
-    }
-    .houses-list {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 50%;
-      height: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      overflow: hidden;
-      border-radius: 10px 0 0 10px;
 
-      .house-item {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-left: 10px;
-        margin-right: 10px;
-        background-color: white;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 10px;
-        text-align: center;
-        box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.2);
-
-        img {
-          max-width: 80%;
-          height: 150px;
-        }
+      .house-choose-button:hover {
+        opacity: 1;
+        transform: scale(1.1);
       }
-    }
-  }
 
-  hr {
-    border: 1px solid rgb(0, 0, 0);
-    width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
+      .available {
+        background-color: #77cc77;
+      }
 
-  .desc {
-    margin: 0;
-    font-size: 1.3rem;
-    color: rgb(58, 58, 58);
-  }
+      .unavailable {
+        background-color: #ffaaaa;
+      }
 
-  .dostepny {
-    margin: 10px;
-    font-size: 1.2rem;
-    color: rgb(0, 66, 0);
-  }
+      #house1a {
+        bottom: 35.5%;
+        left: 29%;
+      }
 
-  .niedostepny {
-    margin: 10px;
-    font-size: 1.2rem;
-    color: rgb(66, 0, 0);
-  }
+      #house1b {
+        bottom: 47%;
+        left: 21%;
+      }
 
-  .action-button {
-    background-color: #fff;
-    border: 0 solid #e2e8f0;
-    border-radius: 1.5rem;
-    box-sizing: border-box;
-    color: #0d172a;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: bold;
-    line-height: 1;
-    padding: 1rem 0.5rem;
-    margin: 5px;
-    text-align: center;
-    text-decoration: none #0d172a solid;
-    text-decoration-thickness: auto;
-    transform: scale(1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    z-index: 1;
+      #house2a {
+        bottom: 40%;
+        left: 31.5%;
+      }
 
-    &:hover {
-      background-color: #333;
-      color: #fff;
-      transform: scale(1.05);
-      box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-    }
-  }
-}
+      #house2b {
+        bottom: 52%;
+        left: 24.5%;
+      }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+      #house3a {
+        bottom: 44%;
+        left: 34%;
+      }
 
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
-    height: 30%;
+      #house3b {
+        bottom: 56.5%;
+        left: 27.5%;
+      }
 
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
+      #house4a {
+        bottom: 48%;
+        left: 36.5%;
+      }
 
-      &:hover,
-      &:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
+      #house4b {
+        bottom: 61%;
+        left: 30.5%;
+      }
+
+      #house5a {
+        bottom: 52%;
+        left: 39%;
+      }
+
+      #house5b {
+        bottom: 65%;
+        left: 33.5%;
+      }
+
+      #house6a {
+        bottom: 56%;
+        left: 41.5%;
+      }
+
+      #house6b {
+        bottom: 68.5%;
+        left: 36.5%;
       }
     }
 
-    .action-button {
-      background-color: #fff;
-      border: 0 solid #e2e8f0;
-      border-radius: 1.5rem;
-      box-sizing: border-box;
-      color: #0d172a;
-      cursor: pointer;
-      display: inline-block;
-      font-size: 1.1rem;
-      font-weight: 600;
-      line-height: 1;
-      padding: 1rem 1.6rem;
-      margin: 5px;
-      text-align: center;
-      text-decoration: none #0d172a solid;
-      text-decoration-thickness: auto;
-      transform: scale(1);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-      z-index: 1;
-
-      &:hover {
-        background-color: #333;
-        color: #fff;
-        transform: scale(1.05);
-        box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-      }
+    .house-details {
+      width: 30%;
     }
   }
 }

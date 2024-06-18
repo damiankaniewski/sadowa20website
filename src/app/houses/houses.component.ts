@@ -9,7 +9,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
   standalone: true,
   templateUrl: './houses.component.html',
   styleUrls: ['./houses.component.scss'],
-  imports: [CommonModule, SlickCarouselModule],
+  imports: [CommonModule],
 })
 export class HousesComponent implements OnInit {
   @ViewChild('modal') modal!: ElementRef;
@@ -17,38 +17,12 @@ export class HousesComponent implements OnInit {
   floor: boolean = true;
 
   selectedHouse: any;
-  slideConfig = {
-    centerMode: false,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    dots: true,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    swipeToSlide: true,
-  };
 
-  constructor(
-    private firestoreService: FirestoreService,
-    public pdfService: PdfService // Zmienione na public
-  ) {}
+  constructor(private firestoreService: FirestoreService) {}
 
   async ngOnInit() {
     this.houses = await this.firestoreService.getData('domy');
     this.houses.sort((a, b) => a.numer - b.numer);
-  }
-
-  openModal(house: any): void {
-    this.selectedHouse = house;
-    this.modal.nativeElement.style.display = 'block';
-  }
-
-  closeModal(): void {
-    this.modal.nativeElement.style.display = 'none';
-  }
-
-  changeFloor(): void {
-    this.floor = !this.floor;
   }
 }
 
