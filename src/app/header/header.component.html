@@ -1,15 +1,26 @@
 <header>
-  <div data-aos="zoom-out" data-aos-duration="1000">
+  <div class="background">
+    <img src="assets/images/backgroundConcreteLong.jpg" alt="" />
+  </div>
+  <div data-aos="zoom-out" data-aos-duration="1000" class="logo-container">
     <a (click)="scrollToElement('homepage')">
       <img src="assets/logoSadowa.png" alt="Logo" class="logo" />
     </a>
   </div>
 
-  <nav data-aos="zoom-out" data-aos-duration="1000">
+  <nav
+    data-aos="zoom-out"
+    data-aos-duration="1000"
+    [ngClass]="{ active: menuActive }"
+  >
     <a (click)="scrollToElement('about')">O inwestycji</a>
     <a (click)="scrollToElement('location')">Lokalizacja</a>
     <a (click)="scrollToElement('profits')">Profity</a>
     <a (click)="scrollToElement('houses')">Domy</a>
     <a (click)="scrollToElement('contact')">Kontakt</a>
   </nav>
+
+  <div class="menu-icon" (click)="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </div>
 </header>

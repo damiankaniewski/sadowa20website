@@ -6,7 +6,7 @@ import { ScrollService } from '../services/scroll/scroll.service';
   standalone: true,
   imports: [],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss',
+  styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent {
   constructor(private scrollService: ScrollService) {}

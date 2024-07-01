@@ -1,40 +1,157 @@
 <div class="main-container">
+  <h2 class="title">Szczegóły domów</h2>
   <div class="choose-container">
     <div class="choose-image-container">
-      <button class="house-choose-button available" id="house1a">1a</button>
-      <button class="house-choose-button unavailable" id="house1b">1b</button>
-      <button class="house-choose-button available" id="house2a">2a</button>
-      <button class="house-choose-button available" id="house2b">2b</button>
-      <button class="house-choose-button unavailable" id="house3a">3a</button>
-      <button class="house-choose-button unavailable" id="house3b">3b</button>
-      <button class="house-choose-button unavailable" id="house4a">4a</button>
-      <button class="house-choose-button available" id="house4b">4b</button>
-      <button class="house-choose-button available" id="house5a">5a</button>
-      <button class="house-choose-button unavailable" id="house5b">5b</button>
-      <button class="house-choose-button available" id="house6a">6a</button>
-      <button class="house-choose-button unavailable" id="house6b">6b</button>
+      <ng-container *ngFor="let house of houses; let i = index">
+        <button
+          [ngClass]="house.parter.dostepnosc ? 'available' : 'unavailable'"
+          class="house-choose-button"
+          id="house{{ i + 1 }}a"
+          (click)="selectHouse(house.parter)"
+        >
+          {{ i + 1 }}a
+        </button>
+        <button
+          [ngClass]="house.pietro.dostepnosc ? 'available' : 'unavailable'"
+          class="house-choose-button"
+          id="house{{ i + 1 }}b"
+          (click)="selectHouse(house.pietro)"
+        >
+          {{ i + 1 }}b
+        </button>
+      </ng-container>
 
       <!-- reszta przyuciskow -->
       <img src="assets/images/domyWybor.png" alt="" />
+      <img class="logo" src="assets/logoSadowa.png" alt="" />
+      <div class="house-details" *ngIf="selectedHouse">
+        <div class="house-name">
+          <div class="house-header">
+            <div class="house-title">
+              <h2>
+                Dom numer <strong>{{ selectedHouse.numer }}</strong>
+              </h2>
+              <p
+                [ngClass]="
+                  selectedHouse.dostepnosc
+                    ? 'house-available'
+                    : 'house-unavailable'
+                "
+              >
+                {{ selectedHouse.dostepnosc ? "Dostępny" : "Niedostępny" }}
+              </p>
+            </div>
+            <button class="action-button">
+              <i class="fa-solid fa-download"></i> Szczegóły
+            </button>
+          </div>
+        </div>
+        <hr />
+        <div class="house-description">
+          <p>
+            <i class="fa-solid fa-house"></i> Metraż:
+            <strong>{{ selectedHouse.metraz }} m²</strong><br />
+            <i class="fa-solid fa-people-roof"></i> Pokoje:
+            <strong>{{ selectedHouse.pokoje }}</strong
+            ><br />
+            <i class="fa-solid fa-tags"></i> Cena:
+            <strong>{{ selectedHouse.cena }} zł</strong>
+          </p>
+        </div>
+        <hr />
+        <div class="house-image">
+          <img [src]="selectedHouse.obrazek" alt="Obrazek domu" />
+          <img
+            *ngIf="selectedHouse.obrazekPoddasze"
+            [src]="selectedHouse.obrazekPoddasze"
+            alt="Obrazek domu"
+          />
+        </div>
+      </div>
     </div>
-    <div class="house-details">
-      <div class="house-name">
-        <h1>Sadowa 20</h1>
-      </div>
-      <div class="house-description">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod
-          lacinia dui, ac efficitur ipsum. Pellentesque habitant morbi tristique
-          senectus et netus et malesuada fames ac turpis egestas.
-        </p>
-      </div>
-      <div class="house-price">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod
-          lacinia dui, ac efficitur ipsum. Pellentesque habitant morbi tristique
-          senectus et netus et malesuada fames ac turpis egestas.
-        </p>
-      </div>
+    <div class="table-container">
+      <ng-container class="table" *ngFor="let house of houses">
+        <div class="house-details alternate-background">
+          <div class="house-name">
+            <div class="house-header">
+              <div class="house-title">
+                <h2>
+                  Dom numer <strong>{{ house.parter.numer }}</strong>
+                </h2>
+                <p
+                  [ngClass]="
+                    house.parter.dostepnosc
+                      ? 'house-available'
+                      : 'house-unavailable'
+                  "
+                >
+                  {{ house.parter.dostepnosc ? "Dostępny" : "Niedostępny" }}
+                </p>
+              </div>
+              <button class="action-button">
+                <i class="fa-solid fa-download"></i> Szczegóły
+              </button>
+            </div>
+          </div>
+          <hr />
+          <div class="house-description">
+            <p>
+              <i class="fa-solid fa-house"></i> Metraż:
+              <strong>{{ house.parter.metraz }} m²</strong><br />
+              <i class="fa-solid fa-people-roof"></i> Pokoje:
+              <strong>{{ house.parter.pokoje }}</strong
+              ><br />
+              <i class="fa-solid fa-tags"></i> Cena:
+              <strong>{{ house.parter.cena }} zł</strong>
+              <br />
+              <i class="fa-solid fa-door-open"></i> Poziom:
+              <strong>Parter</strong>
+            </p>
+          </div>
+          <hr />
+        </div>
+        <div class="house-details">
+          <div class="house-name">
+            <div class="house-header">
+              <div class="house-title">
+                <h2>
+                  Dom numer <strong>{{ house.pietro.numer }}</strong>
+                </h2>
+                <p
+                  [ngClass]="
+                    house.pietro.dostepnosc
+                      ? 'house-available'
+                      : 'house-unavailable'
+                  "
+                >
+                  {{ house.pietro.dostepnosc ? "Dostępny" : "Niedostępny" }}
+                </p>
+              </div>
+              <button class="action-button">
+                <i class="fa-solid fa-download"></i> Szczegóły
+              </button>
+            </div>
+          </div>
+          <hr />
+          <div class="house-description">
+            <p class="house-column">
+              <i class="fa-solid fa-house"></i> Metraż:
+              <strong>{{ house.pietro.metraz }} m²</strong><br />
+              <i class="fa-solid fa-people-roof"></i> Pokoje:
+              <strong>{{ house.pietro.pokoje }}</strong>
+            </p>
+
+            <p class="house-column">
+              <i class="fa-solid fa-tags"></i> Cena:
+              <strong>{{ house.pietro.cena }} zł</strong>
+              <br />
+              <i class="fa-solid fa-door-open"></i> Poziom:
+              <strong>Piętro</strong>
+            </p>
+          </div>
+          <hr />
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

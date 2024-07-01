@@ -1,26 +1,5 @@
-@use "@angular/material" as mat;
-@include mat.core();
-
-$sadowa20website-primary: mat.define-palette(mat.$indigo-palette);
-$sadowa20website-accent: mat.define-palette(
-  mat.$pink-palette,
-  A200,
-  A100,
-  A400
-);
-$sadowa20website-warn: mat.define-palette(mat.$red-palette);
-$sadowa20website-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $sadowa20website-primary,
-      accent: $sadowa20website-accent,
-      warn: $sadowa20website-warn,
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
-@include mat.all-component-themes($sadowa20website-theme);
+$primary-color: rgb(46, 54, 45);
+$secondary-color: rgb(117, 131, 115);
 
 @import "aos/dist/aos.css";
 @import "@fortawesome/fontawesome-free/css/all.css";
@@ -51,4 +30,47 @@ body {
   box-sizing: border-box;
 
   font-family: "LemonMilk", sans-serif;
+
+  .title {
+    font-weight: lighter;
+    font-size: 4rem;
+    margin: 30px;
+    color: $primary-color;
+    position: relative;
+    display: inline-block;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 550px;
+      height: 5px;
+      background-color: $primary-color;
+      transform: translateY(-50%);
+    }
+
+    &::before {
+      right: 120%;
+    }
+
+    &::after {
+      left: 120%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2rem;
+      margin: 20px;
+
+      &::before {
+        right: 110%;
+      }
+
+      &::after {
+        left: 110%;
+      }
+    }
+  }
 }

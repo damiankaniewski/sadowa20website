@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -108,6 +110,31 @@
       border: solid 2px #000;
       margin-top: 15px;
       width: 90%;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-container {
+    height: 320vh !important;
+
+    .left-side,
+    .right-side {
+      flex-direction: column !important;
+      width: 100%;
+
+      .list-container {
+        width: 100% !important;
+
+        .tile {
+          width: 100%;
+        }
+      }
+
+      .image-container {
+        width: 100% !important;
+        height: 100% !important;
+      }
     }
   }
 }

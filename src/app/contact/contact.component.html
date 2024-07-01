@@ -1,29 +1,61 @@
-<form class="contact-form">
-  <div class="form-group">
-    <label for="name">Imię i nazwisko</label>
-    <input type="text" id="name" name="name" required />
-  </div>
-
-  <div class="form-group-double">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
+<div class="main-container">
+  <h2 class="title">Kontakt</h2>
+  <h3>
+    Masz jakieś pytania? Zainteresowała Cię nasza oferta? Zapraszamy serdecznie
+    do kontaktu.
+  </h3>
+  <div class="content">
+    <div class="mapouter">
+      <div class="gmap_canvas">
+        <iframe
+          src="https://maps.google.com/maps?q=sadowa%2020%20wieliczka&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+          frameborder="0"
+          scrolling="no"
+          style="width: 650px; height: 450px"
+        ></iframe
+        ><style>
+          .mapouter {
+            position: relative;
+            height: 400px;
+            width: 650px;
+            background: #fff;
+          }
+        </style>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="phone">Telefon</label>
-      <input type="tel" id="phone" name="phone" required />
-    </div>
-  </div>
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Imię i nazwisko</label>
+        <input type="text" id="name" name="name" required />
+      </div>
 
-  <div class="form-group">
-    <label for="message">Treść wiadomości</label>
-    <textarea id="message" name="message" required></textarea>
-  </div>
+      <div class="form-group-double">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefon</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+      </div>
 
-  <div class="form-group-double">
-    <input type="checkbox" id="privacy-policy" name="privacyPolicy" required />
-    <label for="privacy-policy">Zgadzam się z polityką prywatności</label>
-  </div>
+      <div class="form-group">
+        <label for="message">Treść wiadomości</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
 
-  <button type="submit" class="submit-button">Wyślij</button>
-</form>
+      <div class="form-group-double">
+        <input
+          type="checkbox"
+          id="privacy-policy"
+          name="privacyPolicy"
+          required
+        />
+        <label for="privacy-policy">Zgadzam się z polityką prywatności</label>
+      </div>
+
+      <button type="submit" class="submit-button">Wyślij</button>
+    </form>
+  </div>
+</div>

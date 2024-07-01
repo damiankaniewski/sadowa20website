@@ -12,7 +12,17 @@ export class FirestoreService {
 
   async getData(collection: string): Promise<any[]> {
     const snapshot = await this.db.collection(collection).get();
-    return snapshot.docs.map((doc) => doc.data());
+
+    const sortedData = snapshot.docs
+      .map((doc) => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => {
+        const numA = parseInt(a.id, 10);
+        const numB = parseInt(b.id, 10);
+        return numA - numB;
+      })
+      .map((doc) => doc);
+
+    return sortedData;
   }
 
   async addData(

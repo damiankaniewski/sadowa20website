@@ -1,18 +1,188 @@
 <div class="main-container">
-  <h2>Sadowa 20 to idealna lokalizacja dla Ciebie</h2>
-  <div class="location-container" data-aos="zoom-out" data-aos-duration="1000">
-    <div class="grid-item" *ngFor="let category of categories">
-      <div class="item-header">
-        <div class="background" [ngClass]="category.backgroundClass"></div>
-        <i class="fa-solid" [ngClass]="category.icon"></i>
-        <h3>{{ category.title }}</h3>
-      </div>
-      <hr />
-      <div class="item-content">{{ category.content }}</div>
-    </div>
-  </div>
-
+  <h2 class="title">Lokalizacja</h2>
   <div class="map-container">
-    <img src="assets/images/mapka.png" alt="Lokalizacja Sadowa 20" />
+    <div class="left-bar">
+      <div
+        class="tile-left"
+        data-aos="fade-right"
+        data-aos-delay="300"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-cart-shopping"></i>
+        <div class="tile-left-content">
+          <h2>Zakupy</h2>
+          <p>
+            Liczne sklepy spożywcze i usługowe w pobliżu zapewniają łatwy dostęp
+            do codziennych potrzeb, oferując szeroki wybór produktów i usług.
+          </p>
+          <hr />
+        </div>
+      </div>
+      <div
+        class="tile-left"
+        data-aos="fade-right"
+        data-aos-delay="600"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-graduation-cap"></i>
+        <div class="tile-left-content">
+          <h2>Edukacja</h2>
+          <p>
+            Bliskość szkół i przedszkoli sprawia, że Krzyszkowice są idealne dla
+            rodzin z dziećmi, zapewniając wysoką jakość edukacji.
+          </p>
+          <hr />
+        </div>
+      </div>
+      <div
+        class="tile-left"
+        data-aos="fade-right"
+        data-aos-delay="900"
+        data-aos-duration="2000"
+      >
+        <i class="fa-solid fa-bus"></i>
+        <div class="tile-left-content">
+          <h2>Transport publiczny</h2>
+          <p>
+            Doskonałe połączenia komunikacyjne z Krakowem skracają czas dojazdu
+            do centrum miasta, ułatwiając codzienne podróże.
+          </p>
+          <hr />
+        </div>
+      </div>
+    </div>
+    <div class="map" data-aos="zoom-in" data-aos-duration="2000">
+      <img src="assets/images/baseMap.png" alt="Lokalizacja Sadowa 20" />
+      <div class="map-item" id="sadowa">
+        <i class="fa-solid fa-house-chimney"></i>
+        <div class="item-content">
+          <h3>Sadowa 20</h3>
+        </div>
+        <i id="caret" class="fa-solid fa-caret-down"></i>
+        <i id="caret-shadow" class="fa-solid fa-caret-down"></i>
+      </div>
+      <div class="map-item" id="szkola">
+        <i class="fa-solid fa-school"></i>
+        <div class="item-content">
+          <h3>Szkoła podstawowa</h3>
+          <p>8 min</p>
+        </div>
+        <i id="caret" class="fa-solid fa-caret-down"></i>
+        <i id="caret-shadow" class="fa-solid fa-caret-down"></i>
+      </div>
+      <div class="map-item" id="przystanek">
+        <i class="fa-solid fa-bus"></i>
+        <div class="item-content">
+          <h3>Przystanek autobusowy</h3>
+          <p>1 min</p>
+        </div>
+        <i id="caret" class="fa-solid fa-caret-down"></i>
+        <i id="caret-shadow" class="fa-solid fa-caret-down"></i>
+      </div>
+      <div class="map-item" id="przedszkole">
+        <i class="fa-solid fa-children"></i>
+        <div class="item-content">
+          <h3>Przedszkole</h3>
+          <p>8 min</p>
+        </div>
+        <i id="caret" class="fa-solid fa-caret-down"></i>
+        <i id="caret-shadow" class="fa-solid fa-caret-down"></i>
+      </div>
+      <div class="map-item" id="paczkomat">
+        <i class="fa-solid fa-box-open"></i>
+        <div class="item-content">
+          <h3>Paczkomat</h3>
+          <p>1 min</p>
+        </div>
+        <i id="caret-up" class="fa-solid fa-caret-up"></i>
+        <i id="caret-shadow-up" class="fa-solid fa-caret-up"></i>
+      </div>
+      <div class="map-item" id="sport">
+        <i class="fa-solid fa-futbol"></i>
+        <div class="item-content">
+          <h3>Obiekt sportowy</h3>
+          <p>9 min</p>
+        </div>
+        <i id="caret" class="fa-solid fa-caret-down"></i>
+        <i id="caret-shadow" class="fa-solid fa-caret-down"></i>
+      </div>
+      <div class="map-item" id="szkola-jez">
+        <i class="fa-solid fa-book"></i>
+        <div class="item-content">
+          <h3>Szkoła języków obcych</h3>
+          <p>12 min</p>
+        </div>
+        <i id="caret-up" class="fa-solid fa-caret-up"></i>
+        <i id="caret-shadow-up" class="fa-solid fa-caret-up"></i>
+      </div>
+      <div class="map-item" id="sklep">
+        <i class="fa-solid fa-shop"></i>
+        <div class="item-content">
+          <h3>Sklep spożywczy</h3>
+          <p>6 min</p>
+        </div>
+        <i id="caret" class="fa-solid fa-caret-down"></i>
+        <i id="caret-shadow" class="fa-solid fa-caret-down"></i>
+      </div>
+      <div class="map-item" id="tereny-zielone">
+        <i class="fa-solid fa-tree"></i>
+        <div class="item-content">
+          <h3>Tereny zielone</h3>
+          <p>14 min</p>
+        </div>
+        <i id="caret-up" class="fa-solid fa-caret-up"></i>
+        <i id="caret-shadow-up" class="fa-solid fa-caret-up"></i>
+      </div>
+    </div>
+    <div class="right-bar">
+      <div
+        class="tile-right"
+        data-aos="fade-left"
+        data-aos-delay="300"
+        data-aos-duration="2000"
+      >
+        <div class="tile-right-content">
+          <h2>Rozrywka</h2>
+          <p>
+            Bogata oferta kulturalno-sportowa, basen, siłownia, sauna, korty
+            tenisowe, aktywny trybo życia oraz rozwijanie pasji sportowych.
+          </p>
+          <hr />
+        </div>
+        <i class="fa-solid fa-futbol"></i>
+      </div>
+      <div
+        class="tile-right"
+        data-aos="fade-left"
+        data-aos-delay="600"
+        data-aos-duration="2000"
+      >
+        <div class="tile-right-content">
+          <h2>Usługi</h2>
+          <p>
+            Różnorodne usługi w okolicy, takie jak piekarnia, paczkomat.
+            Gwarancja wygody i komfortu życia mieszkańców Krzyszkowic.
+          </p>
+          <hr />
+        </div>
+        <i class="fa-solid fa-house-laptop"></i>
+      </div>
+      <div
+        class="tile-right"
+        data-aos="fade-left"
+        data-aos-delay="900"
+        data-aos-duration="2000"
+      >
+        <div class="tile-right-content">
+          <h2>Rekreacja</h2>
+          <p>
+            Duże tereny zielone i wspólna strefa wypoczynku z altanką, idealne
+            miejsce na relaks z rodziną i przyjaciółmi.
+          </p>
+          <hr />
+        </div>
+        <i class="fa-solid fa-leaf"></i>
+      </div>
+    </div>
   </div>
 </div>
