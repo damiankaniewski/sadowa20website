@@ -29,7 +29,7 @@ header {
   .logo-container {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     z-index: 1;
   }
 
@@ -76,6 +76,14 @@ header {
 
     i {
       color: #fff;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 1.3rem !important;
+    margin-right: 0 !important;
+    a {
+      margin-left: 10px !important;
     }
   }
 

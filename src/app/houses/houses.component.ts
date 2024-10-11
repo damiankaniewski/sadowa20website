@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirestoreService } from '../services/firebase/firestore.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-houses',
@@ -15,7 +17,10 @@ export class HousesComponent implements OnInit {
   selectedHouse: any = null;
   selectedFloor: boolean = true; // true - parter, false - pietro
 
-  constructor(private firestoreService: FirestoreService) {}
+  constructor(
+    private firestoreService: FirestoreService,
+    private storage: AngularFireStorage
+  ) {}
 
   async ngOnInit() {
     this.houses = await this.firestoreService.getData('domy');
@@ -32,31 +37,45 @@ export class HousesComponent implements OnInit {
     this.selectedHouse = housePart;
   }
 
+  downloadPDF(pdfPath: string) {
+    this.storage
+      .ref(pdfPath)
+      .getDownloadURL()
+      .subscribe((url) => {
+        window.open(url, '_blank');
+      });
+  }
+
+  getImageURL(imagePath: string) {
+    return 'assets/rzuty/' + imagePath;
+  }
+
   addHouses() {
     let house = {};
     for (let i = 0; i < 13; i++) {
+      var numerDomu = i + 1;
       house = {
         pietro: {
           dostepnosc: false,
-          obrazek:
-            'https://firebasestorage.googleapis.com/v0/b/sadowa20-90070.appspot.com/o/sadowaPietro.png?alt=media&token=eae86636-bcc8-4a90-9e9f-b0a0368d2cda',
+          obrazek: 'sadowaPietro.jpg',
+          obrazekPoddasze: 'sadowaPoddasze.jpg',
           metraz: 133,
           pokoje: 3,
           cena: 690800,
-          numer: i + 1 + 'b',
+          numer: numerDomu + 'b',
+          pdf: 'pdf/' + numerDomu + 'b' + '-min.pdf',
         },
         parter: {
-          obrazek:
-            'https://firebasestorage.googleapis.com/v0/b/sadowa20-90070.appspot.com/o/sadowaParter.png?alt=media&token=75ffeea0-8bb1-41b6-8127-672892aa4c30',
+          obrazek: 'sadowaParter.jpg',
           metraz: 132,
-          numer: i + 1 + 'a',
+          numer: numerDomu + 'a',
           pokoje: 4,
           dostepnosc: true,
           cena: 750800,
+          pdf: 'pdf/' + numerDomu + 'a' + '-min.pdf',
         },
       };
       this.firestoreService.addData('domy', (i + 1).toString(), house);
-      console.log('test');
     }
   }
 }

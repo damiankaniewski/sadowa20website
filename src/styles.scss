@@ -74,3 +74,38 @@ body {
     }
   }
 }
+
+// slick carousel
+
+.slick-dots {
+  position: absolute;
+  bottom: 2% !important;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+  li {
+    margin: 0 5px;
+  }
+
+  button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white !important;
+    opacity: 0.3;
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+
+    &:before {
+      display: none;
+    }
+  }
+
+  .slick-active button {
+    background-color: black;
+    opacity: 1;
+  }
+}

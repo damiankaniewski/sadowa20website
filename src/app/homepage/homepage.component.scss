@@ -99,10 +99,28 @@
   }
 }
 
+@media (max-width: 1280px) {
+  .home-container {
+    background: url(/assets/images/mainImageMobile.jpg);
+    background-size: auto 130%;
+    background-repeat: no-repeat;
+    background-position: 40% 80%;
+
+    .center-image {
+      display: none;
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .home-container {
-    .logo-image img {
-      width: 500px;
+    background-size: auto 110%;
+    background-position: 50% center;
+
+    .logo-image {
+      img {
+        width: 500px;
+      }
     }
     .headline {
       font-size: 6rem;

@@ -21,8 +21,8 @@
         </button>
       </ng-container>
 
-      <!-- reszta przyuciskow -->
-      <img src="assets/images/domyWybor.png" alt="" />
+      <!-- reszta przyciskow -->
+      <img src="assets/images/domyWybor.jpg" alt="" />
       <img class="logo" src="assets/logoSadowa.png" alt="" />
       <div class="house-details" *ngIf="selectedHouse">
         <div class="house-name">
@@ -41,8 +41,12 @@
                 {{ selectedHouse.dostepnosc ? "Dostępny" : "Niedostępny" }}
               </p>
             </div>
-            <button class="action-button">
-              <i class="fa-solid fa-download"></i> Szczegóły
+            <button
+              class="action-button"
+              (click)="downloadPDF(selectedHouse.pdf)"
+            >
+              <i class="fa-solid fa-download"></i>
+              <p>Szczegóły</p>
             </button>
           </div>
         </div>
@@ -60,11 +64,11 @@
         </div>
         <hr />
         <div class="house-image">
-          <img [src]="selectedHouse.obrazek" alt="Obrazek domu" />
+          <img [src]="getImageURL(selectedHouse.obrazek)" alt="Obrazek domu" />
           <img
             *ngIf="selectedHouse.obrazekPoddasze"
-            [src]="selectedHouse.obrazekPoddasze"
-            alt="Obrazek domu"
+            [src]="getImageURL(selectedHouse.obrazekPoddasze)"
+            alt="Obrazek poddasza"
           />
         </div>
       </div>
@@ -88,8 +92,12 @@
                   {{ house.parter.dostepnosc ? "Dostępny" : "Niedostępny" }}
                 </p>
               </div>
-              <button class="action-button">
-                <i class="fa-solid fa-download"></i> Szczegóły
+              <button
+                class="action-button"
+                (click)="downloadPDF(house.parter.pdf)"
+              >
+                <i class="fa-solid fa-download"></i>
+                <p>Szczegóły</p>
               </button>
             </div>
           </div>
@@ -127,8 +135,12 @@
                   {{ house.pietro.dostepnosc ? "Dostępny" : "Niedostępny" }}
                 </p>
               </div>
-              <button class="action-button">
-                <i class="fa-solid fa-download"></i> Szczegóły
+              <button
+                class="action-button"
+                (click)="downloadPDF(house.pietro.pdf)"
+              >
+                <i class="fa-solid fa-download"></i>
+                <p>Szczegóły</p>
               </button>
             </div>
           </div>

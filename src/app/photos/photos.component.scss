@@ -1,0 +1,22 @@
+.carousel {
+  width: 100vw;
+  height: calc(100vh - 80px);
+  margin: 0 auto;
+  position: relative;
+}
+
+.slide img {
+  width: 100vw;
+  height: calc(100vh - 80px);
+  object-fit: cover;
+}
+
+@media screen and (max-width: 1536px) {
+  .carousel {
+    height: auto;
+  }
+
+  .slide img {
+    height: auto;
+  }
+}
