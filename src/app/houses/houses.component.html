@@ -2,12 +2,14 @@
   <h2 class="title">Szczegóły domów</h2>
   <div class="choose-container">
     <div class="choose-image-container">
+      <p id="ii-etap">II Etap</p>
       <ng-container *ngFor="let house of houses; let i = index">
         <button
           [ngClass]="house.parter.dostepnosc ? 'available' : 'unavailable'"
           class="house-choose-button"
           id="house{{ i + 1 }}a"
-          (click)="selectHouse(house.parter)"
+          (click)="selectHouse(house.parter, i)"
+          [disabled]="i < 6"
         >
           {{ i + 1 }}a
         </button>
@@ -15,7 +17,8 @@
           [ngClass]="house.pietro.dostepnosc ? 'available' : 'unavailable'"
           class="house-choose-button"
           id="house{{ i + 1 }}b"
-          (click)="selectHouse(house.pietro)"
+          (click)="selectHouse(house.pietro, i * 100)"
+          [disabled]="i < 6"
         >
           {{ i + 1 }}b
         </button>
@@ -38,7 +41,14 @@
                     : 'house-unavailable'
                 "
               >
-                {{ selectedHouse.dostepnosc ? "Dostępny" : "Niedostępny" }}
+                {{
+                  parseInt(selectedHouse.numer) <= 6 &&
+                  !selectedHouse.dostepnosc
+                    ? "II Etap"
+                    : selectedHouse.dostepnosc
+                    ? "Dostępny"
+                    : "Niedostępny"
+                }}
               </p>
             </div>
             <button
@@ -52,9 +62,16 @@
         </div>
         <hr />
         <div class="house-description">
-          <p>
+          <p class="house-column">
             <i class="fa-solid fa-house"></i> Metraż:
             <strong>{{ selectedHouse.metraz }} m²</strong><br />
+            <span class="house-column" *ngIf="selectedHouse.ogrodek">
+              <i class="fa-solid fa-door-open"></i> Ogródek:
+              <strong>{{ selectedHouse.ogrodek }} m²</strong></span
+            >
+          </p>
+
+          <p class="house-column">
             <i class="fa-solid fa-people-roof"></i> Pokoje:
             <strong>{{ selectedHouse.pokoje }}</strong
             ><br />
@@ -73,9 +90,12 @@
         </div>
       </div>
     </div>
-    <div class="table-container">
-      <ng-container class="table" *ngFor="let house of houses">
-        <div class="house-details alternate-background">
+    <div class="table-container" #tableContainer>
+      <ng-container class="table" *ngFor="let house of houses; let i = index">
+        <div
+          class="house-details alternate-background"
+          [attr.id]="'house-parter' + i"
+        >
           <div class="house-name">
             <div class="house-header">
               <div class="house-title">
@@ -89,11 +109,19 @@
                       : 'house-unavailable'
                   "
                 >
-                  {{ house.parter.dostepnosc ? "Dostępny" : "Niedostępny" }}
+                  {{
+                    parseInt(house.parter.numer) <= 6 &&
+                    !house.parter.dostepnosc
+                      ? "II Etap"
+                      : house.parter.dostepnosc
+                      ? "Dostępny"
+                      : "Niedostępny"
+                  }}
                 </p>
               </div>
               <button
                 class="action-button"
+                ngClass="house-{{ i }}"
                 (click)="downloadPDF(house.parter.pdf)"
               >
                 <i class="fa-solid fa-download"></i>
@@ -101,24 +129,31 @@
               </button>
             </div>
           </div>
-          <hr />
-          <div class="house-description">
-            <p>
+          <hr ngClass="house-{{ i }}" />
+          <div class="house-description" ngClass="house-{{ i }}">
+            <p class="house-column">
               <i class="fa-solid fa-house"></i> Metraż:
               <strong>{{ house.parter.metraz }} m²</strong><br />
               <i class="fa-solid fa-people-roof"></i> Pokoje:
-              <strong>{{ house.parter.pokoje }}</strong
-              ><br />
+              <strong>{{ house.parter.pokoje }}</strong>
+            </p>
+
+            <p class="house-column">
               <i class="fa-solid fa-tags"></i> Cena:
               <strong>{{ house.parter.cena }} zł</strong>
               <br />
               <i class="fa-solid fa-door-open"></i> Poziom:
               <strong>Parter</strong>
             </p>
+
+            <p class="house-column" *ngIf="house.parter.ogrodek">
+              <i class="fa-solid fa-door-open"></i> Ogródek:
+              <strong>{{ house.parter.ogrodek }} m²</strong>
+            </p>
           </div>
-          <hr />
+          <hr ngClass="house-{{ i }}" />
         </div>
-        <div class="house-details">
+        <div class="house-details" [attr.id]="'house-pietro' + i * 100">
           <div class="house-name">
             <div class="house-header">
               <div class="house-title">
@@ -132,11 +167,19 @@
                       : 'house-unavailable'
                   "
                 >
-                  {{ house.pietro.dostepnosc ? "Dostępny" : "Niedostępny" }}
+                  {{
+                    parseInt(house.pietro.numer) <= 6 &&
+                    !house.pietro.dostepnosc
+                      ? "II Etap"
+                      : house.pietro.dostepnosc
+                      ? "Dostępny"
+                      : "Niedostępny"
+                  }}
                 </p>
               </div>
               <button
                 class="action-button"
+                ngClass="house-{{ i }}"
                 (click)="downloadPDF(house.pietro.pdf)"
               >
                 <i class="fa-solid fa-download"></i>
@@ -144,8 +187,8 @@
               </button>
             </div>
           </div>
-          <hr />
-          <div class="house-description">
+          <hr ngClass="house-{{ i }}" />
+          <div class="house-description" ngClass="house-{{ i }}">
             <p class="house-column">
               <i class="fa-solid fa-house"></i> Metraż:
               <strong>{{ house.pietro.metraz }} m²</strong><br />
@@ -158,10 +201,15 @@
               <strong>{{ house.pietro.cena }} zł</strong>
               <br />
               <i class="fa-solid fa-door-open"></i> Poziom:
-              <strong>Piętro</strong>
+              <strong>Piętro + poddasze</strong>
+            </p>
+
+            <p class="house-column" *ngIf="house.pietro.ogrodek">
+              <i class="fa-solid fa-door-open"></i> Ogródek:
+              <strong>{{ house.pietro.ogrodek }} m²</strong>
             </p>
           </div>
-          <hr />
+          <hr ngClass="house-{{ i }}" />
         </div>
       </ng-container>
     </div>

@@ -1,8 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FirestoreService } from '../services/firebase/firestore.service';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-houses',
@@ -13,69 +10,330 @@ import { Observable } from 'rxjs';
 })
 export class HousesComponent implements OnInit {
   @ViewChild('modal') modal!: ElementRef;
-  houses: any[] = [];
+  houses = [
+    {
+      parter: {
+        numer: '1a',
+        dostepnosc: false,
+        metraz: 100,
+        pokoje: 3,
+        cena: 500000,
+        pdf: 'dom1_parter.pdf',
+        obrazek: 'parter.png',
+      },
+      pietro: {
+        numer: '1b',
+        dostepnosc: false,
+        metraz: 120,
+        pokoje: 4,
+        cena: 600000,
+        pdf: 'dom1_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '2a',
+        dostepnosc: false,
+        metraz: 100,
+        pokoje: 3,
+        cena: 500000,
+        pdf: 'dom2_parter.pdf',
+        obrazek: 'parter.png',
+      },
+      pietro: {
+        numer: '2b',
+        dostepnosc: false,
+        metraz: 120,
+        pokoje: 4,
+        cena: 600000,
+        pdf: 'dom2_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '3a',
+        dostepnosc: false,
+        metraz: 100,
+        pokoje: 3,
+        cena: 500000,
+        pdf: 'dom3_parter.pdf',
+        obrazek: 'parter.png',
+      },
+      pietro: {
+        numer: '3b',
+        dostepnosc: false,
+        metraz: 120,
+        pokoje: 4,
+        cena: 600000,
+        pdf: 'dom3_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '4a',
+        dostepnosc: false,
+        metraz: 100,
+        pokoje: 3,
+        cena: 500000,
+        pdf: 'dom4_parter.pdf',
+        obrazek: 'parter.png',
+      },
+      pietro: {
+        numer: '4b',
+        dostepnosc: false,
+        metraz: 120,
+        pokoje: 4,
+        cena: 600000,
+        pdf: 'dom4_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '5a',
+        dostepnosc: false,
+        metraz: 100,
+        pokoje: 3,
+        cena: 500000,
+        pdf: 'dom5_parter.pdf',
+        obrazek: 'parter.png',
+      },
+      pietro: {
+        numer: '5b',
+        dostepnosc: false,
+        metraz: 120,
+        pokoje: 4,
+        cena: 600000,
+        pdf: 'dom5_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '6a',
+        dostepnosc: false,
+        metraz: 100,
+        pokoje: 3,
+        cena: 500000,
+        pdf: 'dom6_parter.pdf',
+        obrazek: 'parter.png',
+      },
+      pietro: {
+        numer: '6b',
+        dostepnosc: false,
+        metraz: 120,
+        pokoje: 4,
+        cena: 600000,
+        pdf: 'dom6_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '7a',
+        dostepnosc: true,
+        metraz: 54.91,
+        pokoje: 2,
+        cena: 604010,
+        pdf: 'dom7_parter.pdf',
+        obrazek: 'parter.png',
+        ogrodek: 38.41,
+      },
+      pietro: {
+        numer: '7b',
+        dostepnosc: true,
+        metraz: 119.34,
+        pokoje: 4,
+        cena: 877393,
+        pdf: 'dom7_pietro.pdf',
+        obrazek: 'pietro.png',
+        ogrodek: 106.18,
+      },
+    },
+    {
+      parter: {
+        numer: '8a',
+        dostepnosc: true,
+        metraz: 54.91,
+        pokoje: 2,
+        cena: 560082,
+        pdf: 'dom8_parter.pdf',
+        obrazek: 'parter.png',
+        ogrodek: 37.3,
+      },
+      pietro: {
+        numer: '8b',
+        dostepnosc: true,
+        metraz: 119.34,
+        pokoje: 4,
+        cena: 835109,
+        pdf: 'dom8_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '9a',
+        dostepnosc: true,
+        metraz: 54.91,
+        pokoje: 2,
+        cena: 527136,
+        pdf: 'dom9_parter.pdf',
+        obrazek: 'parter.png',
+        ogrodek: 37.3,
+      },
+      pietro: {
+        numer: '9b',
+        dostepnosc: true,
+        metraz: 119.34,
+        pokoje: 4,
+        cena: 803396,
+        pdf: 'dom9_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '10a',
+        dostepnosc: true,
+        metraz: 54.91,
+        pokoje: 2,
+        cena: 521645,
+        pdf: 'dom10_parter.pdf',
+        obrazek: 'parter.png',
+        ogrodek: 37.3,
+      },
+      pietro: {
+        numer: '10b',
+        dostepnosc: true,
+        metraz: 119.34,
+        pokoje: 4,
+        cena: 792825,
+        pdf: 'dom10_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '11a',
+        dostepnosc: true,
+        metraz: 54.91,
+        pokoje: 2,
+        cena: 532627,
+        pdf: 'dom11_parter.pdf',
+        obrazek: 'parter.png',
+        ogrodek: 37.3,
+      },
+      pietro: {
+        numer: '11b',
+        dostepnosc: true,
+        metraz: 119.34,
+        pokoje: 4,
+        cena: 803396,
+        pdf: 'dom11_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '12a',
+        dostepnosc: true,
+        metraz: 54.91,
+        pokoje: 2,
+        cena: 560082,
+        pdf: 'dom12_parter.pdf',
+        obrazek: 'parter.png',
+        ogrodek: 37.3,
+      },
+      pietro: {
+        numer: '12b',
+        dostepnosc: true,
+        metraz: 119.34,
+        pokoje: 4,
+        cena: 835109,
+        pdf: 'dom12_pietro.pdf',
+        obrazek: 'pietro.png',
+      },
+    },
+    {
+      parter: {
+        numer: '13a',
+        dostepnosc: true,
+        metraz: 54.91,
+        pokoje: 2,
+        cena: 631465,
+        pdf: 'dom13_parter.pdf',
+        obrazek: 'parter.png',
+        ogrodek: 38.33,
+      },
+      pietro: {
+        numer: '13b',
+        dostepnosc: true,
+        metraz: 119.34,
+        pokoje: 4,
+        cena: 898535,
+        pdf: 'dom13_pietro.pdf',
+        obrazek: 'pietro.png',
+        ogrodek: 125.53,
+      },
+    },
+  ];
   selectedHouse: any = null;
   selectedFloor: boolean = true; // true - parter, false - pietro
 
-  constructor(
-    private firestoreService: FirestoreService,
-    private storage: AngularFireStorage
-  ) {}
-
-  async ngOnInit() {
-    this.houses = await this.firestoreService.getData('domy');
-    this.houses.sort((a, b) => {
-      const numA = parseInt(a.numer, 10);
-      const numB = parseInt(b.numer, 10);
-      return numA - numB;
-    });
-    this.selectHouse(this.houses[0].parter);
+  ngOnInit() {
     this.selectedFloor = true;
   }
+  selectHouse(selectedHouse: any, index: number) {
+    this.selectedHouse = selectedHouse;
 
-  selectHouse(housePart: any) {
-    this.selectedHouse = housePart;
+    const elementParter = document.getElementById('house-parter' + index);
+    const elementPietro = document.getElementById('house-pietro' + index);
+    const tableContainer = document.querySelector(
+      '.table-container'
+    ) as HTMLElement;
+
+    if (elementParter && tableContainer) {
+      const elementPosition =
+        elementParter.getBoundingClientRect().top -
+        tableContainer.getBoundingClientRect().top;
+      tableContainer.scrollTo({
+        top: elementPosition + tableContainer.scrollTop,
+        behavior: 'smooth',
+      });
+    }
+
+    if (elementPietro && tableContainer) {
+      const elementPosition =
+        elementPietro.getBoundingClientRect().top -
+        tableContainer.getBoundingClientRect().top;
+      tableContainer.scrollTo({
+        top: elementPosition + tableContainer.scrollTop,
+        behavior: 'smooth',
+      });
+    }
   }
 
   downloadPDF(pdfPath: string) {
-    this.storage
-      .ref(pdfPath)
-      .getDownloadURL()
-      .subscribe((url) => {
-        window.open(url, '_blank');
-      });
+    // Dodaj prostą logikę do pobierania pliku PDF z katalogu `assets`
+    const link = document.createElement('a');
+    link.href = 'assets/pdfs/' + pdfPath;
+    link.download = pdfPath;
+    link.click();
   }
 
   getImageURL(imagePath: string) {
     return 'assets/rzuty/' + imagePath;
   }
 
-  addHouses() {
-    let house = {};
-    for (let i = 0; i < 13; i++) {
-      var numerDomu = i + 1;
-      house = {
-        pietro: {
-          dostepnosc: false,
-          obrazek: 'sadowaPietro.jpg',
-          obrazekPoddasze: 'sadowaPoddasze.jpg',
-          metraz: 133,
-          pokoje: 3,
-          cena: 690800,
-          numer: numerDomu + 'b',
-          pdf: 'pdf/' + numerDomu + 'b' + '-min.pdf',
-        },
-        parter: {
-          obrazek: 'sadowaParter.jpg',
-          metraz: 132,
-          numer: numerDomu + 'a',
-          pokoje: 4,
-          dostepnosc: true,
-          cena: 750800,
-          pdf: 'pdf/' + numerDomu + 'a' + '-min.pdf',
-        },
-      };
-      this.firestoreService.addData('domy', (i + 1).toString(), house);
-    }
+  parseInt(houseNumber: string): number {
+    return parseInt(houseNumber);
+  }
+
+  getIEtapHouses(): any[] {
+    return this.houses.slice(6, 13);
   }
 }

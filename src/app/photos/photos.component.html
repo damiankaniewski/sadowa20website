@@ -1,5 +1,19 @@
-<ngx-slick-carousel class="carousel" [config]="slideConfig">
-  <div ngxSlickItem *ngFor="let img of images" class="slide">
-    <img [src]="img" alt="Image" />
+<div class="carousel-container">
+  <ngx-slick-carousel
+    class="carousel"
+    [config]="slideConfig"
+    #slickModal="slick-carousel"
+  >
+    <div ngxSlickItem *ngFor="let img of images" class="slide">
+      <img [src]="img" alt="Image" />
+    </div>
+  </ngx-slick-carousel>
+  <div class="buttons">
+    <button class="custom-prev" (click)="slickModal.slickPrev()">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <button class="custom-next" (click)="slickModal.slickNext()">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
   </div>
-</ngx-slick-carousel>
+</div>
