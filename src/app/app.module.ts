@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
+
 import { AboutComponent } from './about/about.component';
 import { LocationComponent } from './location/location.component';
 import { ProfitsComponent } from './profits/profits.component';

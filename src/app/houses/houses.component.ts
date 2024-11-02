@@ -287,6 +287,10 @@ export class HousesComponent implements OnInit {
   ngOnInit() {
     this.selectedFloor = true;
   }
+
+  ngAfterViewInit() {
+    this.selectHouse(this.houses[6].parter, 6);
+  }
   selectHouse(selectedHouse: any, index: number) {
     this.selectedHouse = selectedHouse;
 
