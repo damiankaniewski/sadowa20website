@@ -23,6 +23,7 @@ import { PhotosComponent } from './photos/photos.component';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { HttpClientModule } from '@angular/common/http';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -47,6 +48,7 @@ firebase.initializeApp(environment.firebaseConfig);
     SignatureComponent,
     PhotosComponent,
     SlickCarouselModule,
+    HttpClientModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
