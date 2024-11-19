@@ -62,9 +62,9 @@ export class HousesComponent implements OnInit {
   }
 
   downloadPDF(pdfPath: string) {
-    // Dodaj prostą logikę do pobierania pliku PDF z katalogu `assets`
     const link = document.createElement('a');
-    link.href = 'assets/pdfs/' + pdfPath;
+    link.href = pdfPath;
+    link.target = '_blank';
     link.download = pdfPath;
     link.click();
   }
