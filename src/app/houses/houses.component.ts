@@ -32,6 +32,7 @@ export class HousesComponent implements OnInit {
           const idB = parseInt(b.id, 10);
           return idA - idB;
         });
+        this.selectHouse(this.houses[12], 12);
       },
       (error) => {
         console.error('Error in fetching houses from DynamoDB!', error);
@@ -39,26 +40,27 @@ export class HousesComponent implements OnInit {
     );
   }
 
-  ngAfterViewInit() {
-    this.selectHouse(this.houses[12], 12);
-  }
   selectHouse(selectedHouse: any, index: number) {
+    console.log('selectedHouse: ' + selectedHouse);
+    console.log('index: ' + index);
     this.selectedHouse = selectedHouse;
 
-    const house = document.getElementById('house-' + index);
-    const tableContainer = document.querySelector(
-      '.table-container'
-    ) as HTMLElement;
+    setTimeout(() => {
+      const house = document.getElementById('house-' + index);
+      const tableContainer = document.querySelector(
+        '.table-container'
+      ) as HTMLElement;
 
-    if (house && tableContainer) {
-      const elementPosition =
-        house.getBoundingClientRect().top -
-        tableContainer.getBoundingClientRect().top;
-      tableContainer.scrollTo({
-        top: elementPosition + tableContainer.scrollTop,
-        behavior: 'smooth',
-      });
-    }
+      if (house && tableContainer) {
+        const elementPosition =
+          house.getBoundingClientRect().top -
+          tableContainer.getBoundingClientRect().top;
+        tableContainer.scrollTo({
+          top: elementPosition + tableContainer.scrollTop,
+          behavior: 'smooth',
+        });
+      }
+    }, 0);
   }
 
   downloadPDF(pdfPath: string) {

@@ -5,7 +5,11 @@
       <p id="ii-etap">II Etap</p>
       <ng-container *ngFor="let house of houses; let i = index">
         <button
-          [ngClass]="house.dostepnosc ? 'available' : 'unavailable'"
+          [ngClass]="{
+            available: house.dostepnosc === 1,
+            unavailable: house.dostepnosc === 0,
+            reserved: house.dostepnosc === 2
+          }"
           class="house-choose-button"
           id="house{{ house.id }}"
           (click)="selectHouse(house, i)"
@@ -26,18 +30,20 @@
                 Dom numer <strong>{{ selectedHouse.numer }}</strong>
               </h2>
               <p
-                [ngClass]="
-                  selectedHouse.dostepnosc
-                    ? 'house-available'
-                    : 'house-unavailable'
-                "
+                [ngClass]="{
+                  'house-available': selectedHouse.dostepnosc === 1,
+                  'house-unavailable': selectedHouse.dostepnosc === 0,
+                  'house-reserved': selectedHouse.dostepnosc === 2
+                }"
               >
                 {{
                   parseInt(selectedHouse.numer) <= 12 &&
-                  !selectedHouse.dostepnosc
+                  selectedHouse.dostepnosc === 0
                     ? "II Etap"
-                    : selectedHouse.dostepnosc
+                    : selectedHouse.dostepnosc === 1
                     ? "Dostępny"
+                    : selectedHouse.dostepnosc === 2
+                    ? "Zarezerwowany"
                     : "Niedostępny"
                 }}
               </p>
@@ -58,8 +64,8 @@
             <strong>{{ selectedHouse.metraz }} m²</strong><br />
             <span class="house-column" *ngIf="selectedHouse.ogrodek">
               <i class="fa-solid fa-door-open"></i> Ogródek:
-              <strong>{{ selectedHouse.ogrodek }} m²</strong></span
-            >
+              <strong>{{ selectedHouse.ogrodek }} m²</strong>
+            </span>
           </p>
 
           <p class="house-column">
@@ -95,15 +101,19 @@
                   Dom numer <strong>{{ house.numer }}</strong>
                 </h2>
                 <p
-                  [ngClass]="
-                    house.dostepnosc ? 'house-available' : 'house-unavailable'
-                  "
+                  [ngClass]="{
+                    'house-available': house.dostepnosc === 1,
+                    'house-unavailable': house.dostepnosc === 0,
+                    'house-reserved': house.dostepnosc === 2
+                  }"
                 >
                   {{
-                    parseInt(house.numer) <= 6 && !house.dostepnosc
+                    parseInt(house.numer) <= 6 && house.dostepnosc === 0
                       ? "II Etap"
-                      : house.dostepnosc
+                      : house.dostepnosc === 1
                       ? "Dostępny"
+                      : house.dostepnosc === 2
+                      ? "Zarezerwowany"
                       : "Niedostępny"
                   }}
                 </p>

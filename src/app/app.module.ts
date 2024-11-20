@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -20,17 +19,9 @@ import { HousesComponent } from './houses/houses.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignatureComponent } from './signature/signature.component';
 import { PhotosComponent } from './photos/photos.component';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
 
-firebase.initializeApp(environment.firebaseConfig);
-
 @NgModule({
-  providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
-  ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,

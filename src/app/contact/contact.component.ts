@@ -5,7 +5,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AngularFireFunctions } from '@angular/fire/compat/functions';
 
 @Component({
   selector: 'app-contact',
@@ -17,10 +16,7 @@ import { AngularFireFunctions } from '@angular/fire/compat/functions';
 export class ContactComponent {
   contactForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private functions: AngularFireFunctions
-  ) {
+  constructor(private fb: FormBuilder) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -31,24 +27,6 @@ export class ContactComponent {
   }
 
   onSubmit() {
-    if (this.contactForm.valid) {
-      const contactData = this.contactForm.value;
-
-      const callable = this.functions.httpsCallable('sendContactEmail');
-      callable(contactData).subscribe({
-        next: (result) => {
-          if (result.success) {
-            console.log('Email sent successfully');
-          } else {
-            console.error('Failed to send email:', result.error);
-          }
-        },
-        error: (err) => {
-          console.error('Error calling cloud function:', err);
-        },
-      });
-    } else {
-      console.warn('Form is not valid');
-    }
+    // do dodania z aws
   }
 }
