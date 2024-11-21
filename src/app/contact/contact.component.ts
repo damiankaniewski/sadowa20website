@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ScrollService } from '../services/scroll/scroll.service';
-import { HomepageComponent } from '../homepage/homepage.component';
 
 @Component({
   selector: 'app-contact',
@@ -18,6 +17,7 @@ import { HomepageComponent } from '../homepage/homepage.component';
 })
 export class ContactComponent {
   contactForm: FormGroup;
+  private lastSubmissionTime: number | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -39,9 +39,15 @@ export class ContactComponent {
       return;
     }
 
+    const now = Date.now();
+
+    if (this.lastSubmissionTime && now - this.lastSubmissionTime < 60000) {
+      alert('Wiadomość została już wysłana. Możesz wysłać kolejną za minutę.');
+      return;
+    }
+
     const formData = this.contactForm.value;
 
-    // Przygotowanie danych do wysyłki
     const body = {
       email: 'damian.kaniewski.contact@gmail.com',
       subject: `Sadowa 20 - Wiadomość od: ${formData.name}`,
@@ -63,6 +69,7 @@ export class ContactComponent {
         (response) => {
           alert('Wiadomość została wysłana pomyślnie!');
           this.contactForm.reset();
+          this.lastSubmissionTime = now;
           const element = document.getElementById('homepage');
           if (element) {
             this.scrollService.scrollToElement(element);
