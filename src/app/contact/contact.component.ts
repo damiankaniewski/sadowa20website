@@ -44,8 +44,7 @@ export class ContactComponent {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'x-api-key':
-        "pQ5,psD6vUm~&cf2P'tGTo]V`P(E@]bYS[V&8BrVXoS=SqQ(_>G6Vaa~82-ap%e",
+      'x-api-key': '_just-a\'test"key,or>is<it?',
     });
 
     this.http
