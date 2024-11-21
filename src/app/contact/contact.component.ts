@@ -42,14 +42,16 @@ export class ContactComponent {
     const now = Date.now();
 
     if (this.lastSubmissionTime && now - this.lastSubmissionTime < 60000) {
-      alert('Wiadomość została już wysłana. Możesz wysłać kolejną za minutę.');
+      alert(
+        'Wiadomość została już wysłana. Poczekaj przed wysłaniem kolejnej.'
+      );
       return;
     }
 
     const formData = this.contactForm.value;
 
     const body = {
-      email: 'damian.kaniewski.contact@gmail.com',
+      email: 'damian.kaniewski.contact@gmail.com', // do zamiany na n20
       subject: `Sadowa 20 - Wiadomość od: ${formData.name}`,
       message: `Imię i nazwisko - ${formData.name}\nEmail - ${formData.email}\nTelefon - ${formData.phone}\n\n${formData.message}`,
     };
