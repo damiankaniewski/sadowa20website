@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ScrollService } from '../services/scroll/scroll.service';
+import { HomepageComponent } from '../homepage/homepage.component';
 
 @Component({
   selector: 'app-contact',
@@ -17,7 +19,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ContactComponent {
   contactForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private scrollService: ScrollService
+  ) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -57,10 +63,17 @@ export class ContactComponent {
         (response) => {
           alert('Wiadomość została wysłana pomyślnie!');
           this.contactForm.reset();
+          const element = document.getElementById('homepage');
+          if (element) {
+            this.scrollService.scrollToElement(element);
+          }
         },
         (error) => {
-          console.error('Błąd podczas wysyłania wiadomości:', error);
-          alert('Nie udało się wysłać wiadomości. Spróbuj ponownie.');
+          alert('Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę.');
+          const element = document.getElementById('homepage');
+          if (element) {
+            this.scrollService.scrollToElement(element);
+          }
         }
       );
   }
