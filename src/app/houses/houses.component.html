@@ -72,8 +72,10 @@
             <i class="fa-solid fa-people-roof"></i> Pokoje:
             <strong>{{ selectedHouse.pokoje }}</strong
             ><br />
-            <i class="fa-solid fa-tags"></i> Cena:
-            <strong>{{ selectedHouse.cena }} zł</strong>
+            <ng-container *ngIf="selectedHouse.dostepnosc !== 0">
+              <i class="fa-solid fa-tags"></i> Cena:
+              <strong>{{ selectedHouse.cena }} zł</strong>
+            </ng-container>
           </p>
         </div>
         <hr />
@@ -138,9 +140,11 @@
             </p>
 
             <p class="house-column">
-              <i class="fa-solid fa-tags"></i> Cena:
-              <strong>{{ house.cena }} zł</strong>
-              <br />
+              <ng-container *ngIf="house.dostepnosc !== 0">
+                <i class="fa-solid fa-tags"></i> Cena:
+                <strong>{{ house.cena }} zł</strong>
+                <br />
+              </ng-container>
               <i class="fa-solid fa-door-open"></i> Poziom:
               <strong>Parter</strong>
             </p>
