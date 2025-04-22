@@ -50,7 +50,7 @@
             </div>
             <button
               class="action-button"
-              (click)="downloadPDF(selectedHouse.pdf)"
+              (click)="downloadPDF(selectedHouse.numer)"
             >
               <i class="fa-solid fa-download"></i>
               <p>Szczegóły</p>
@@ -123,7 +123,7 @@
               <button
                 class="action-button"
                 ngClass="house-{{ i }}"
-                (click)="downloadPDF(house.pdf)"
+                (click)="downloadPDF(house.numer)"
               >
                 <i class="fa-solid fa-download"></i>
                 <p>Szczegóły</p>

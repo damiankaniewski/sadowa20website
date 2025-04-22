@@ -63,11 +63,10 @@ export class HousesComponent implements OnInit {
     }, 0);
   }
 
-  downloadPDF(pdfPath: string) {
+  downloadPDF(houseNumber: string) {
     const link = document.createElement('a');
-    link.href = pdfPath;
-    link.target = '_blank';
-    link.download = pdfPath;
+    link.href = 'assets/jpgs/' + houseNumber + '_page1.jpg';
+    link.download = 'sadowa20_' + houseNumber + '_rzut.jpg';
     link.click();
   }
 
