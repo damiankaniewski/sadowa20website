@@ -146,7 +146,9 @@
                 <br />
               </ng-container>
               <i class="fa-solid fa-door-open"></i> Poziom:
-              <strong>Parter</strong>
+              <strong>
+                {{ house.numer.endsWith("a") ? "Parter" : "Piętro" }}</strong
+              >
             </p>
 
             <p class="house-column" *ngIf="house.ogrodek">
