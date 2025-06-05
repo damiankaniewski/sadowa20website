@@ -51,7 +51,7 @@ export class ContactComponent {
     const formData = this.contactForm.value;
 
     const body = {
-      email: 'biuro@n20.pl', // do zamiany na n20
+      email: 'biuro@n20.pl',
       subject: `Sadowa 20 - Wiadomość od: ${formData.name}`,
       message: `Imię i nazwisko - ${formData.name}\nEmail - ${formData.email}\nTelefon - ${formData.phone}\n\n${formData.message}`,
     };

@@ -32,7 +32,7 @@ export class HousesComponent implements OnInit {
           const idB = parseInt(b.id, 10);
           return idA - idB;
         });
-        this.selectHouse(this.houses[12], 12);
+        this.selectHouse(this.houses[0], 0);
       },
       (error) => {
         console.error('Error in fetching houses from DynamoDB!', error);
@@ -79,6 +79,6 @@ export class HousesComponent implements OnInit {
   }
 
   getIEtapHouses(): any[] {
-    return this.houses.slice(13, 26);
+    return this.houses;
   }
 }

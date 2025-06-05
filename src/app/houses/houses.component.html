@@ -2,7 +2,6 @@
   <h2 class="title">Szczegóły domów</h2>
   <div class="choose-container">
     <div class="choose-image-container">
-      <p id="ii-etap">II Etap</p>
       <ng-container *ngFor="let house of houses; let i = index">
         <button
           [ngClass]="{
@@ -13,7 +12,6 @@
           class="house-choose-button"
           id="house{{ house.id }}"
           (click)="selectHouse(house, i)"
-          [disabled]="i < 12"
         >
           <p>{{ house.id }}</p>
         </button>
@@ -37,10 +35,7 @@
                 }"
               >
                 {{
-                  parseInt(selectedHouse.numer) <= 12 &&
-                  selectedHouse.dostepnosc === 0
-                    ? "II Etap"
-                    : selectedHouse.dostepnosc === 1
+                  selectedHouse.dostepnosc === 1
                     ? "Dostępny"
                     : selectedHouse.dostepnosc === 2
                     ? "Zarezerwowany"
@@ -110,9 +105,7 @@
                   }"
                 >
                   {{
-                    parseInt(house.numer) <= 6 && house.dostepnosc === 0
-                      ? "II Etap"
-                      : house.dostepnosc === 1
+                    house.dostepnosc === 1
                       ? "Dostępny"
                       : house.dostepnosc === 2
                       ? "Zarezerwowany"

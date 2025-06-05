@@ -204,87 +204,64 @@
         background-color: #968940;
       }
 
-      #ii-etap {
-        position: absolute;
-        bottom: 51%;
-        left: 26%;
-        transform: rotate(-46deg);
-        font-size: 3vw;
-        color: gray !important;
-        font-weight: bold;
-        filter: drop-shadow(1px 1px 1px #000);
-      }
-
       #house1a {
         bottom: 35.5%;
         left: 29%;
-        background-color: gray;
       }
 
       #house1b {
         bottom: 47%;
         left: 21%;
-        background-color: gray;
       }
 
       #house2a {
         bottom: 40%;
         left: 31.5%;
-        background-color: gray;
       }
 
       #house2b {
         bottom: 52%;
         left: 24.5%;
-        background-color: gray;
       }
 
       #house3a {
         bottom: 44%;
         left: 34%;
-        background-color: gray;
       }
 
       #house3b {
         bottom: 56.5%;
         left: 27.5%;
-        background-color: gray;
       }
 
       #house4a {
         bottom: 48%;
         left: 36.5%;
-        background-color: gray;
       }
 
       #house4b {
         bottom: 61%;
         left: 30.5%;
-        background-color: gray;
       }
 
       #house5a {
         bottom: 52%;
         left: 39%;
-        background-color: gray;
       }
 
       #house5b {
         bottom: 65%;
         left: 33.5%;
-        background-color: gray;
       }
 
       #house6a {
         bottom: 56%;
         left: 41.5%;
-        background-color: gray;
       }
 
       #house6b {
         bottom: 68.5%;
         left: 36.5%;
-        background-color: gray;
       }
 
       #house7a {
@@ -369,21 +346,6 @@
       box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
       height: 80.5vh;
       overflow-y: auto;
-
-      .house-0,
-      .house-1,
-      .house-2,
-      .house-3,
-      .house-4,
-      .house-5,
-      .house-6,
-      .house-7,
-      .house-8,
-      .house-9,
-      .house-10,
-      .house-11 {
-        display: none !important;
-      }
 
       .alternate-background {
         background-color: #eee !important;
