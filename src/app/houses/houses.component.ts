@@ -28,9 +28,17 @@ export class HousesComponent implements OnInit {
     this.http.get<{ body: any[] }>(url).subscribe(
       (response) => {
         this.houses = response.body.sort((a, b) => {
-          const idA = parseInt(a.id, 10);
-          const idB = parseInt(b.id, 10);
-          return idA - idB;
+          const numA = parseInt(a.id, 10);
+          const numB = parseInt(b.id, 10);
+
+          if (numA !== numB) {
+            return numA - numB;
+          }
+
+          const letterA = a.id.replace(/^\d+/, '');
+          const letterB = b.id.replace(/^\d+/, '');
+
+          return letterA.localeCompare(letterB);
         });
         this.selectHouse(this.houses[0], 0);
       },
@@ -41,8 +49,6 @@ export class HousesComponent implements OnInit {
   }
 
   selectHouse(selectedHouse: any, index: number) {
-    console.log('selectedHouse: ' + selectedHouse);
-    console.log('index: ' + index);
     this.selectedHouse = selectedHouse;
 
     setTimeout(() => {

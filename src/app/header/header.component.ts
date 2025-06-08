@@ -23,7 +23,6 @@ export class HeaderComponent {
   }
 
   toggleMenu(): void {
-    console.log('toggle');
     this.menuActive = !this.menuActive;
   }
 }
