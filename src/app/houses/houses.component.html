@@ -69,7 +69,21 @@
             ><br />
             <ng-container *ngIf="selectedHouse.dostepnosc !== 0">
               <i class="fa-solid fa-tags"></i> Cena:
-              <strong>{{ selectedHouse.cena }} zł</strong>
+              <strong>{{ selectedHouse.currentPrice }} zł</strong>
+
+              <!-- 🔥 ikona z tooltipem -->
+              <span
+                class="price-history-tooltip"
+                *ngIf="selectedHouse.priceHistory?.length"
+              >
+                <i class="fa-solid fa-circle-info"></i>
+                <div class="tooltip-content">
+                  Poprzednie ceny
+                  <p *ngFor="let h of selectedHouse.priceHistory">
+                    {{ h.data }}: {{ h.cena }} zł
+                  </p>
+                </div>
+              </span>
             </ng-container>
           </p>
         </div>
@@ -135,9 +149,23 @@
             <p class="house-column">
               <ng-container *ngIf="house.dostepnosc !== 0">
                 <i class="fa-solid fa-tags"></i> Cena:
-                <strong>{{ house.cena }} zł</strong>
-                <br />
+                <strong>{{ house.currentPrice }} zł</strong>
+
+                <!-- 🔥 ikona z tooltipem -->
+                <span
+                  class="price-history-tooltip"
+                  *ngIf="house.priceHistory?.length"
+                >
+                  <i class="fa-solid fa-circle-info"></i>
+                  <div class="tooltip-content">
+                    Poprzednie ceny
+                    <p *ngFor="let h of house.priceHistory">
+                      {{ h.data }}: {{ h.cena }} zł
+                    </p>
+                  </div>
+                </span>
               </ng-container>
+              <br />
               <i class="fa-solid fa-door-open"></i> Poziom:
               <strong>
                 {{ house.numer.endsWith("a") ? "Parter" : "Piętro" }}</strong

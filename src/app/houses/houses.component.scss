@@ -530,3 +530,35 @@
     }
   }
 }
+
+.price-history-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+
+  i {
+    color: rgb(46, 54, 45);
+  }
+
+  .tooltip-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 120%;
+    left: 0;
+    z-index: 10;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.2s;
+  }
+
+  &:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+  }
+}
