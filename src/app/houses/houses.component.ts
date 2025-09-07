@@ -86,6 +86,10 @@ export class HousesComponent implements OnInit {
     }
   }
 
+  toggleTooltip(house: any) {
+    house.showTooltip = !house.showTooltip;
+  }
+
   selectHouse(selectedHouse: any, index: number) {
     this.selectedHouse = selectedHouse;
 

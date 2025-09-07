@@ -71,13 +71,17 @@
               <i class="fa-solid fa-tags"></i> Cena:
               <strong>{{ selectedHouse.currentPrice }} zł</strong>
 
-              <!-- 🔥 ikona z tooltipem -->
               <span
                 class="price-history-tooltip"
                 *ngIf="selectedHouse.priceHistory?.length"
+                (click)="toggleTooltip(selectedHouse)"
               >
                 <i class="fa-solid fa-circle-info"></i>
-                <div class="tooltip-content">
+                <div
+                  class="tooltip-content"
+                  [class.show]="selectedHouse.showTooltip"
+                  [class.hide]="!selectedHouse.showTooltip"
+                >
                   Poprzednie ceny
                   <p *ngFor="let h of selectedHouse.priceHistory">
                     {{ h.data }}: {{ h.cena }} zł
@@ -151,13 +155,17 @@
                 <i class="fa-solid fa-tags"></i> Cena:
                 <strong>{{ house.currentPrice }} zł</strong>
 
-                <!-- 🔥 ikona z tooltipem -->
                 <span
                   class="price-history-tooltip"
                   *ngIf="house.priceHistory?.length"
+                  (click)="toggleTooltip(house)"
                 >
                   <i class="fa-solid fa-circle-info"></i>
-                  <div class="tooltip-content">
+                  <div
+                    class="tooltip-content"
+                    [class.show]="house.showTooltip"
+                    [class.hide]="!house.showTooltip"
+                  >
                     Poprzednie ceny
                     <p *ngFor="let h of house.priceHistory">
                       {{ h.data }}: {{ h.cena }} zł
