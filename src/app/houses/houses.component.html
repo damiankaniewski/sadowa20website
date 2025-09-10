@@ -59,21 +59,25 @@
             <strong>{{ selectedHouse.metraz }} m²</strong><br />
             <span class="house-column" *ngIf="selectedHouse.ogrodek">
               <i class="fa-solid fa-door-open"></i> Ogródek:
-              <strong>{{ selectedHouse.ogrodek }} m²</strong>
-            </span>
+              <strong>{{ selectedHouse.ogrodek }} m²</strong> </span
+            ><br />
+            <i class="fa-solid fa-tags"></i> Cena za metr:
+            <strong>
+              {{ selectedHouse.cena / selectedHouse.metraz | number : "1.2-2" }}
+              zł/m²
+            </strong>
           </p>
 
           <p class="house-column">
             <i class="fa-solid fa-people-roof"></i> Pokoje:
             <strong>{{ selectedHouse.pokoje }}</strong
             ><br />
-            <ng-container *ngIf="selectedHouse.dostepnosc !== 0">
+            <ng-container>
               <i class="fa-solid fa-tags"></i> Cena:
-              <strong>{{ selectedHouse.currentPrice }} zł</strong>
+              <strong>{{ selectedHouse.cena }} zł</strong>
 
               <span
                 class="price-history-tooltip"
-                *ngIf="selectedHouse.priceHistory?.length"
                 (click)="toggleTooltip(selectedHouse)"
               >
                 <i class="fa-solid fa-circle-info"></i>
@@ -82,9 +86,9 @@
                   [class.show]="selectedHouse.showTooltip"
                   [class.hide]="!selectedHouse.showTooltip"
                 >
-                  Poprzednie ceny
-                  <p *ngFor="let h of selectedHouse.priceHistory">
-                    {{ h.data }}: {{ h.cena }} zł
+                  Najniższa cena z ostatnich 30 dni:
+                  <p>
+                    <strong>{{ selectedHouse.cena30 }} zł</strong>
                   </p>
                 </div>
               </span>
@@ -147,17 +151,22 @@
               <i class="fa-solid fa-house"></i> Metraż:
               <strong>{{ house.metraz }} m²</strong><br />
               <i class="fa-solid fa-people-roof"></i> Pokoje:
-              <strong>{{ house.pokoje }}</strong>
+              <strong>{{ house.pokoje }}</strong
+              ><br />
+              <i class="fa-solid fa-tags"></i> Cena za metr:
+              <strong>
+                {{ house.cena / house.metraz | number : "1.2-2" }}
+                zł/m²
+              </strong>
             </p>
 
             <p class="house-column">
-              <ng-container *ngIf="house.dostepnosc !== 0">
+              <ng-container>
                 <i class="fa-solid fa-tags"></i> Cena:
-                <strong>{{ house.currentPrice }} zł</strong>
+                <strong>{{ house.cena }} zł</strong>
 
                 <span
                   class="price-history-tooltip"
-                  *ngIf="house.priceHistory?.length"
                   (click)="toggleTooltip(house)"
                 >
                   <i class="fa-solid fa-circle-info"></i>
@@ -166,9 +175,9 @@
                     [class.show]="house.showTooltip"
                     [class.hide]="!house.showTooltip"
                   >
-                    Poprzednie ceny
-                    <p *ngFor="let h of house.priceHistory">
-                      {{ h.data }}: {{ h.cena }} zł
+                    Najniższa cena z ostatnich 30 dni:
+                    <p>
+                      <strong>{{ house.cena30 }} zł</strong>
                     </p>
                   </div>
                 </span>
