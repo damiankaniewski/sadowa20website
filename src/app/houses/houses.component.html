@@ -75,7 +75,6 @@
             <ng-container>
               <i class="fa-solid fa-tags"></i> Cena:
               <strong>{{ selectedHouse.cena }} zł</strong>
-
               <span
                 class="price-history-tooltip"
                 (click)="toggleTooltip(selectedHouse)"
@@ -86,10 +85,30 @@
                   [class.show]="selectedHouse.showTooltip"
                   [class.hide]="!selectedHouse.showTooltip"
                 >
-                  Najniższa cena z ostatnich 30 dni:
+                  Najniższa&nbsp;cena&nbsp;z ostatnich&nbsp;30&nbsp;dni:
                   <p>
-                    <strong>{{ selectedHouse.cena30 }} zł</strong>
+                    <strong>{{ selectedHouse.cena30 | number }} zł</strong>
                   </p>
+
+                  <hr />
+
+                  Historia&nbsp;cen:
+                  <div
+                    *ngIf="
+                      selectedHouse.price_history?.length > 0;
+                      else brakHistSel
+                    "
+                  >
+                    <ul>
+                      <li *ngFor="let entry of selectedHouse.price_history">
+                        {{ entry.date | date : "yyyy-MM-dd HH:mm" }} –
+                        <strong>{{ entry.cena | number }} zł</strong>
+                      </li>
+                    </ul>
+                  </div>
+                  <ng-template #brakHistSel>
+                    <em>brak</em>
+                  </ng-template>
                 </div>
               </span>
             </ng-container>
@@ -164,7 +183,6 @@
               <ng-container>
                 <i class="fa-solid fa-tags"></i> Cena:
                 <strong>{{ house.cena }} zł</strong>
-
                 <span
                   class="price-history-tooltip"
                   (click)="toggleTooltip(house)"
@@ -175,10 +193,25 @@
                     [class.show]="house.showTooltip"
                     [class.hide]="!house.showTooltip"
                   >
-                    Najniższa cena z ostatnich 30 dni:
+                    Najniższa&nbsp;cena&nbsp;z ostatnich&nbsp;30&nbsp;dni:
                     <p>
-                      <strong>{{ house.cena30 }} zł</strong>
+                      <strong>{{ house.cena30 | number }} zł</strong>
                     </p>
+
+                    <hr />
+
+                    Historia&nbsp;cen:
+                    <div *ngIf="house.price_history?.length > 0; else brakHist">
+                      <ul>
+                        <li *ngFor="let entry of house.price_history">
+                          {{ entry.date | date : "yyyy-MM-dd" }} –
+                          <strong>{{ entry.cena | number }}&nbsp;zł</strong>
+                        </li>
+                      </ul>
+                    </div>
+                    <ng-template #brakHist>
+                      <em>brak</em>
+                    </ng-template>
                   </div>
                 </span>
               </ng-container>
