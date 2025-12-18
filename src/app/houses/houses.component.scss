@@ -7,6 +7,15 @@
   align-items: center;
   width: 100vw;
 
+  .title {
+    margin-bottom: 0;
+  }
+
+  .subtitle {
+    text-align: justify;
+    margin: 10px;
+  }
+
   .choose-container {
     display: flex;
     flex-direction: row;
