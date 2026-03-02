@@ -191,7 +191,7 @@
         p {
           color: white;
           font-weight: bold;
-          font-size: 1vw;
+          font-size: 0.9vw;
           filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.5));
         }
       }
@@ -202,15 +202,15 @@
       }
 
       .available {
-        background-color: #49ad49;
+        background-color: #6afd6a75;
       }
 
       .unavailable {
-        background-color: #c94a4a;
+        background-color: #ff5e5e75;
       }
 
       .reserved {
-        background-color: #968940;
+        background-color: #ffe96e75;
       }
 
       #house1a {
