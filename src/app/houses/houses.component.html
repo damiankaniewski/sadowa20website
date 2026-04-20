@@ -10,7 +10,8 @@
         <button
           [ngClass]="{
             available: house.dostepnosc === 1,
-            unavailable: house.dostepnosc === 0,
+            unavailable: isUnavailable(house),
+            sold: house.dostepnosc === 0,
             reserved: house.dostepnosc === 2
           }"
           class="house-choose-button"
@@ -34,20 +35,16 @@
               <p
                 [ngClass]="{
                   'house-available': selectedHouse.dostepnosc === 1,
-                  'house-unavailable': selectedHouse.dostepnosc === 0,
+                  'house-unavailable': isUnavailable(selectedHouse),
+                  'house-sold': selectedHouse.dostepnosc === 0,
                   'house-reserved': selectedHouse.dostepnosc === 2
                 }"
               >
-                {{
-                  selectedHouse.dostepnosc === 1
-                    ? "Dostępny"
-                    : selectedHouse.dostepnosc === 2
-                    ? "Zarezerwowany"
-                    : "Sprzedany"
-                }}
+                {{ getAvailabilityLabel(selectedHouse) }}
               </p>
             </div>
             <button
+              *ngIf="!isUnavailable(selectedHouse)"
               class="action-button"
               (click)="downloadPDF(selectedHouse.numer)"
             >
@@ -56,77 +53,79 @@
             </button>
           </div>
         </div>
-        <hr />
-        <div class="house-description">
-          <p class="house-column">
-            <i class="fa-solid fa-house"></i> Metraż:
-            <strong>{{ selectedHouse.metraz }} m²</strong><br />
-            <span class="house-column" *ngIf="selectedHouse.ogrodek">
-              <i class="fa-solid fa-door-open"></i> Ogródek:
-              <strong>{{ selectedHouse.ogrodek }} m²</strong> </span
-            ><br />
-            <i class="fa-solid fa-tags"></i> Cena za metr:
-            <strong>
-              {{ selectedHouse.cena / selectedHouse.metraz | number : "1.2-2" }}
-              zł/m²
-            </strong>
-          </p>
+        <ng-container *ngIf="!isUnavailable(selectedHouse)">
+          <hr />
+          <div class="house-description">
+            <p class="house-column">
+              <i class="fa-solid fa-house"></i> Metraż:
+              <strong>{{ selectedHouse.metraz }} m²</strong><br />
+              <span class="house-column" *ngIf="selectedHouse.ogrodek">
+                <i class="fa-solid fa-door-open"></i> Ogródek:
+                <strong>{{ selectedHouse.ogrodek }} m²</strong> </span
+              ><br />
+              <i class="fa-solid fa-tags"></i> Cena za metr:
+              <strong>
+                {{ selectedHouse.cena / selectedHouse.metraz | number : "1.2-2" }}
+                zł/m²
+              </strong>
+            </p>
 
-          <p class="house-column">
-            <i class="fa-solid fa-people-roof"></i> Pokoje:
-            <strong>{{ selectedHouse.pokoje }}</strong
-            ><br />
-            <ng-container>
-              <i class="fa-solid fa-tags"></i> Cena:
-              <strong>{{ selectedHouse.cena }} zł</strong>
-              <span
-                class="price-history-tooltip"
-                (click)="toggleTooltip(selectedHouse)"
-              >
-                <i class="fa-solid fa-circle-info"></i>
-                <div
-                  class="tooltip-content"
-                  [class.show]="selectedHouse.showTooltip"
-                  [class.hide]="!selectedHouse.showTooltip"
+            <p class="house-column">
+              <i class="fa-solid fa-people-roof"></i> Pokoje:
+              <strong>{{ selectedHouse.pokoje }}</strong
+              ><br />
+              <ng-container>
+                <i class="fa-solid fa-tags"></i> Cena:
+                <strong>{{ selectedHouse.cena }} zł</strong>
+                <span
+                  class="price-history-tooltip"
+                  (click)="toggleTooltip(selectedHouse)"
                 >
-                  Najniższa&nbsp;cena&nbsp;z ostatnich&nbsp;30&nbsp;dni:
-                  <p>
-                    <strong>{{ selectedHouse.cena30 | number }} zł</strong>
-                  </p>
-
-                  <hr />
-
-                  Historia&nbsp;cen:
+                  <i class="fa-solid fa-circle-info"></i>
                   <div
-                    *ngIf="
-                      selectedHouse.price_history?.length > 0;
-                      else brakHistSel
-                    "
+                    class="tooltip-content"
+                    [class.show]="selectedHouse.showTooltip"
+                    [class.hide]="!selectedHouse.showTooltip"
                   >
-                    <ul>
-                      <li *ngFor="let entry of selectedHouse.price_history">
-                        {{ entry.date | date : "yyyy-MM-dd HH:mm" }} –
-                        <strong>{{ entry.cena | number }} zł</strong>
-                      </li>
-                    </ul>
+                    Najniższa&nbsp;cena&nbsp;z ostatnich&nbsp;30&nbsp;dni:
+                    <p>
+                      <strong>{{ selectedHouse.cena30 | number }} zł</strong>
+                    </p>
+
+                    <hr />
+
+                    Historia&nbsp;cen:
+                    <div
+                      *ngIf="
+                        selectedHouse.price_history?.length > 0;
+                        else brakHistSel
+                      "
+                    >
+                      <ul>
+                        <li *ngFor="let entry of selectedHouse.price_history">
+                          {{ entry.date | date : "yyyy-MM-dd HH:mm" }} –
+                          <strong>{{ entry.cena | number }} zł</strong>
+                        </li>
+                      </ul>
+                    </div>
+                    <ng-template #brakHistSel>
+                      <em>brak</em>
+                    </ng-template>
                   </div>
-                  <ng-template #brakHistSel>
-                    <em>brak</em>
-                  </ng-template>
-                </div>
-              </span>
-            </ng-container>
-          </p>
-        </div>
-        <hr />
-        <div class="house-image">
-          <img [src]="getImageURL(selectedHouse.obrazek)" alt="Obrazek domu" />
-          <img
-            *ngIf="selectedHouse.obrazekPoddasze"
-            [src]="getImageURL(selectedHouse.obrazekPoddasze)"
-            alt="Obrazek poddasza"
-          />
-        </div>
+                </span>
+              </ng-container>
+            </p>
+          </div>
+          <hr />
+          <div class="house-image">
+            <img [src]="getImageURL(selectedHouse.obrazek)" alt="Obrazek domu" />
+            <img
+              *ngIf="selectedHouse.obrazekPoddasze"
+              [src]="getImageURL(selectedHouse.obrazekPoddasze)"
+              alt="Obrazek poddasza"
+            />
+          </div>
+        </ng-container>
       </div>
     </div>
     <div class="table-container" #tableContainer>
@@ -145,20 +144,16 @@
                 <p
                   [ngClass]="{
                     'house-available': house.dostepnosc === 1,
-                    'house-unavailable': house.dostepnosc === 0,
+                    'house-unavailable': isUnavailable(house),
+                    'house-sold': house.dostepnosc === 0,
                     'house-reserved': house.dostepnosc === 2
                   }"
                 >
-                  {{
-                    house.dostepnosc === 1
-                      ? "Dostępny"
-                      : house.dostepnosc === 2
-                      ? "Zarezerwowany"
-                      : "Sprzedany"
-                  }}
+                  {{ getAvailabilityLabel(house) }}
                 </p>
               </div>
               <button
+                *ngIf="!isUnavailable(house)"
                 class="action-button"
                 ngClass="house-{{ i }}"
                 (click)="downloadPDF(house)"
@@ -168,70 +163,72 @@
               </button>
             </div>
           </div>
-          <hr ngClass="house-{{ i }}" />
-          <div class="house-description" ngClass="house-{{ i }}">
-            <p class="house-column">
-              <i class="fa-solid fa-house"></i> Metraż:
-              <strong>{{ house.metraz }} m²</strong><br />
-              <i class="fa-solid fa-people-roof"></i> Pokoje:
-              <strong>{{ house.pokoje }}</strong
-              ><br />
-              <i class="fa-solid fa-tags"></i> Cena za metr:
-              <strong>
-                {{ house.cena / house.metraz | number : "1.2-2" }}
-                zł/m²
-              </strong>
-            </p>
+          <ng-container *ngIf="!isUnavailable(house)">
+            <hr ngClass="house-{{ i }}" />
+            <div class="house-description" ngClass="house-{{ i }}">
+              <p class="house-column">
+                <i class="fa-solid fa-house"></i> Metraż:
+                <strong>{{ house.metraz }} m²</strong><br />
+                <i class="fa-solid fa-people-roof"></i> Pokoje:
+                <strong>{{ house.pokoje }}</strong
+                ><br />
+                <i class="fa-solid fa-tags"></i> Cena za metr:
+                <strong>
+                  {{ house.cena / house.metraz | number : "1.2-2" }}
+                  zł/m²
+                </strong>
+              </p>
 
-            <p class="house-column">
-              <ng-container>
-                <i class="fa-solid fa-tags"></i> Cena:
-                <strong>{{ house.cena }} zł</strong>
-                <span
-                  class="price-history-tooltip"
-                  (click)="toggleTooltip(house)"
-                >
-                  <i class="fa-solid fa-circle-info"></i>
-                  <div
-                    class="tooltip-content"
-                    [class.show]="house.showTooltip"
-                    [class.hide]="!house.showTooltip"
+              <p class="house-column">
+                <ng-container>
+                  <i class="fa-solid fa-tags"></i> Cena:
+                  <strong>{{ house.cena }} zł</strong>
+                  <span
+                    class="price-history-tooltip"
+                    (click)="toggleTooltip(house)"
                   >
-                    Najniższa&nbsp;cena&nbsp;z ostatnich&nbsp;30&nbsp;dni:
-                    <p>
-                      <strong>{{ house.cena30 | number }} zł</strong>
-                    </p>
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div
+                      class="tooltip-content"
+                      [class.show]="house.showTooltip"
+                      [class.hide]="!house.showTooltip"
+                    >
+                      Najniższa&nbsp;cena&nbsp;z ostatnich&nbsp;30&nbsp;dni:
+                      <p>
+                        <strong>{{ house.cena30 | number }} zł</strong>
+                      </p>
 
-                    <hr />
+                      <hr />
 
-                    Historia&nbsp;cen:
-                    <div *ngIf="house.price_history?.length > 0; else brakHist">
-                      <ul>
-                        <li *ngFor="let entry of house.price_history">
-                          {{ entry.date | date : "yyyy-MM-dd" }} –
-                          <strong>{{ entry.cena | number }}&nbsp;zł</strong>
-                        </li>
-                      </ul>
+                      Historia&nbsp;cen:
+                      <div *ngIf="house.price_history?.length > 0; else brakHist">
+                        <ul>
+                          <li *ngFor="let entry of house.price_history">
+                            {{ entry.date | date : "yyyy-MM-dd" }} –
+                            <strong>{{ entry.cena | number }}&nbsp;zł</strong>
+                          </li>
+                        </ul>
+                      </div>
+                      <ng-template #brakHist>
+                        <em>brak</em>
+                      </ng-template>
                     </div>
-                    <ng-template #brakHist>
-                      <em>brak</em>
-                    </ng-template>
-                  </div>
-                </span>
-              </ng-container>
-              <br />
-              <i class="fa-solid fa-door-open"></i> Poziom:
-              <strong>
-                {{ house.numer.endsWith("a") ? "Parter" : "Piętro" }}</strong
-              >
-            </p>
+                  </span>
+                </ng-container>
+                <br />
+                <i class="fa-solid fa-door-open"></i> Poziom:
+                <strong>
+                  {{ house.numer.endsWith("a") ? "Parter" : "Piętro" }}</strong
+                >
+              </p>
 
-            <p class="house-column" *ngIf="house.ogrodek">
-              <i class="fa-solid fa-door-open"></i> Ogródek:
-              <strong>{{ house.ogrodek }} m²</strong>
-            </p>
-          </div>
-          <hr ngClass="house-{{ i }}" />
+              <p class="house-column" *ngIf="house.ogrodek">
+                <i class="fa-solid fa-door-open"></i> Ogródek:
+                <strong>{{ house.ogrodek }} m²</strong>
+              </p>
+            </div>
+            <hr ngClass="house-{{ i }}" />
+          </ng-container>
         </div>
       </ng-container>
     </div>

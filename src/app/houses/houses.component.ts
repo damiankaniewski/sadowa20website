@@ -11,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HousesComponent implements OnInit {
   @ViewChild('modal') modal!: ElementRef;
+  private readonly unavailableRangeStart = 14;
+  private readonly unavailableRangeEnd = 20;
 
   constructor(private http: HttpClient) {}
   houses: any[] = [];
@@ -27,19 +29,21 @@ export class HousesComponent implements OnInit {
       'https://ilpk6hbe0e.execute-api.eu-north-1.amazonaws.com/dev/get-items';
     this.http.get<{ body: any[] }>(url).subscribe(
       (response) => {
-        this.houses = response.body.sort((a, b) => {
-          const numA = parseInt(a.id, 10);
-          const numB = parseInt(b.id, 10);
+        this.houses = response.body
+          .map((house) => this.applyUnavailableOverride(house))
+          .sort((a, b) => {
+            const numA = parseInt(a.id, 10);
+            const numB = parseInt(b.id, 10);
 
-          if (numA !== numB) {
-            return numA - numB;
-          }
+            if (numA !== numB) {
+              return numA - numB;
+            }
 
-          const letterA = a.id.replace(/^\d+/, '');
-          const letterB = b.id.replace(/^\d+/, '');
+            const letterA = a.id.replace(/^\d+/, '');
+            const letterB = b.id.replace(/^\d+/, '');
 
-          return letterA.localeCompare(letterB);
-        });
+            return letterA.localeCompare(letterB);
+          });
         this.selectHouse(this.houses[0], 0);
       },
       (error) => {
@@ -90,5 +94,45 @@ export class HousesComponent implements OnInit {
 
   getIEtapHouses(): any[] {
     return this.houses;
+  }
+
+  isUnavailable(house: any): boolean {
+    return house.dostepnosc === 3;
+  }
+
+  getAvailabilityLabel(house: any): string {
+    if (this.isUnavailable(house)) {
+      return 'Niedostępny';
+    }
+
+    if (house.dostepnosc === 1) {
+      return 'Dostępny';
+    }
+
+    if (house.dostepnosc === 2) {
+      return 'Zarezerwowany';
+    }
+
+    return 'Sprzedany';
+  }
+
+  private applyUnavailableOverride(house: any): any {
+    if (!this.isHouseInUnavailableRange(house.id)) {
+      return house;
+    }
+
+    return {
+      ...house,
+      dostepnosc: 3,
+    };
+  }
+
+  private isHouseInUnavailableRange(houseId: string): boolean {
+    const houseNumber = parseInt(houseId, 10);
+
+    return (
+      houseNumber >= this.unavailableRangeStart &&
+      houseNumber <= this.unavailableRangeEnd
+    );
   }
 }
