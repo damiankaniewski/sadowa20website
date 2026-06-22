@@ -11,8 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HousesComponent implements OnInit {
   @ViewChild('modal') modal!: ElementRef;
-  private readonly unavailableRangeStart = 14;
-  private readonly unavailableRangeEnd = 20;
+  private readonly secondBuildingStart = 14;
 
   constructor(private http: HttpClient) {}
   houses: any[] = [];
@@ -30,17 +29,21 @@ export class HousesComponent implements OnInit {
     this.http.get<{ body: any[] }>(url).subscribe(
       (response) => {
         this.houses = response.body
-          .map((house) => this.applyUnavailableOverride(house))
+          .map((house) => this.applyBuilding(house))
           .sort((a, b) => {
-            const numA = parseInt(a.id, 10);
-            const numB = parseInt(b.id, 10);
+            if (a.building !== b.building) {
+              return a.building - b.building;
+            }
+
+            const numA = parseInt(a.numer, 10);
+            const numB = parseInt(b.numer, 10);
 
             if (numA !== numB) {
               return numA - numB;
             }
 
-            const letterA = a.id.replace(/^\d+/, '');
-            const letterB = b.id.replace(/^\d+/, '');
+            const letterA = a.numer.replace(/^\d+/, '');
+            const letterB = b.numer.replace(/^\d+/, '');
 
             return letterA.localeCompare(letterB);
           });
@@ -66,21 +69,26 @@ export class HousesComponent implements OnInit {
       ) as HTMLElement;
 
       if (house && tableContainer) {
+        const stickyHeader = tableContainer.querySelector(
+          '.building-header'
+        ) as HTMLElement | null;
+        const headerOffset = stickyHeader ? stickyHeader.offsetHeight : 0;
+
         const elementPosition =
           house.getBoundingClientRect().top -
           tableContainer.getBoundingClientRect().top;
         tableContainer.scrollTo({
-          top: elementPosition + tableContainer.scrollTop,
+          top: elementPosition + tableContainer.scrollTop - headerOffset,
           behavior: 'smooth',
         });
       }
     }, 0);
   }
 
-  downloadPDF(houseNumber: string) {
+  downloadPDF(house: any) {
     const link = document.createElement('a');
-    link.href = 'assets/jpgs/' + houseNumber + '_page1.jpg';
-    link.download = 'sadowa20_' + houseNumber + '_rzut.jpg';
+    link.href = 'assets/jpgs/' + house.numer + '_page1.jpg';
+    link.download = 'sadowa20_' + house.numer + '_rzut.jpg';
     link.click();
   }
 
@@ -116,23 +124,11 @@ export class HousesComponent implements OnInit {
     return 'Sprzedany';
   }
 
-  private applyUnavailableOverride(house: any): any {
-    if (!this.isHouseInUnavailableRange(house.id)) {
-      return house;
-    }
+  private applyBuilding(house: any): any {
+    // Etap II to domy z id 14-20 w bazie (numer to już docelowa numeracja 1-7).
+    const building =
+      parseInt(house.id, 10) >= this.secondBuildingStart ? 2 : 1;
 
-    return {
-      ...house,
-      dostepnosc: 3,
-    };
-  }
-
-  private isHouseInUnavailableRange(houseId: string): boolean {
-    const houseNumber = parseInt(houseId, 10);
-
-    return (
-      houseNumber >= this.unavailableRangeStart &&
-      houseNumber <= this.unavailableRangeEnd
-    );
+    return { ...house, building };
   }
 }

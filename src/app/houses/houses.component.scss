@@ -438,6 +438,21 @@
         background-color: #eee !important;
       }
 
+      .building-header {
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 12px 20px;
+        background-color: #2e362d;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: left;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+      }
+
       .house-details {
         width: 100%;
         background-color: white;

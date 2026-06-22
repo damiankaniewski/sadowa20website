@@ -18,7 +18,7 @@
           id="house{{ house.id }}"
           (click)="selectHouse(house, i)"
         >
-          <p>{{ house.id }}</p>
+          <p>{{ house.numer }}</p>
         </button>
       </ng-container>
 
@@ -46,7 +46,7 @@
             <button
               *ngIf="!isUnavailable(selectedHouse)"
               class="action-button"
-              (click)="downloadPDF(selectedHouse.numer)"
+              (click)="downloadPDF(selectedHouse)"
             >
               <i class="fa-solid fa-download"></i>
               <p>Szczegóły</p>
@@ -130,6 +130,12 @@
     </div>
     <div class="table-container" #tableContainer>
       <ng-container class="table" *ngFor="let house of houses; let i = index">
+        <h3
+          class="building-header"
+          *ngIf="i === 0 || houses[i - 1].building !== house.building"
+        >
+          Etap {{ house.building === 1 ? "I" : "II" }}
+        </h3>
         <div
           class="house-details"
           [ngClass]="{ 'alternate-background': i % 2 === 0 }"
